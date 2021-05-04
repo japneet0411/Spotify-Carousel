@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faPalette, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
 import Canvas from './../canvas/canvas';
 import Modal from 'react-modal';
@@ -53,13 +53,7 @@ class PlayASong extends Component{
       <FontAwesomeIcon icon={faTimes} size="2x" style={{color: "white"}}/>
     </button>
 
-    <button className="add">
-
-    <FontAwesomeIcon icon={faPlusCircle} size="2x" style={{color: "white"}} />      
-     <strong>Add to Playlist</strong>
-    {/* <i class="fas fa-plus-circle"></i> */}
-
-    </button>
+    
 
     <iframe className="frame"
       title="Music" 
@@ -72,6 +66,19 @@ class PlayASong extends Component{
       
     > 
   </iframe>
+  
+  <button className="add">
+    <FontAwesomeIcon icon={faPlusCircle} size="2x" style={{color: "white"}} />  
+    <br></br>    
+     <strong>Add to Playlist</strong>
+     </button>
+
+  <button className="customise">
+    <FontAwesomeIcon icon={faPalette} size="2x" style={{color: "white"}} /> 
+    <br></br>        
+     <strong>Customize</strong>
+     </button>
+
     </Modal>
     </div>
  

@@ -39,6 +39,20 @@ z-index: 15;
     width: 15%;
     padding: 3px;
 }
+
+.customise{
+    z-index: 15;
+    background-color: transparent;
+    border:1px solid white;
+    position: absolute;
+    color: white;
+    width: 10%;
+    font-size: smaller;
+    padding: 3px;
+    margin-left: -46%;
+    margin-top: 37%;
+}
+
 strong{
     padding: 6%;
 

@@ -1,0 +1,15 @@
+  
+.navbar{
+    z-index: 0;
+}
+
+.navbar-toggler-icon{
+    color:white !important;
+    
+}
+.navbar-toggler{
+    border: 3px solid white !important;
+    border-radius: 100% !important;
+    background-color: black !important;
+    padding: 5px !important;
+}
