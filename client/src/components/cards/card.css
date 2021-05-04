@@ -1,0 +1,14 @@
+.card{
+    height: 20%;
+   
+}
+.card-img-top{
+ 
+    height: 200px;
+   
+}
+.card-body{
+    padding-bottom: 2px !important;
+}
+
+

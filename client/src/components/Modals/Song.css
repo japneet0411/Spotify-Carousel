@@ -1,0 +1,45 @@
+.Modal{
+    height:100vh;
+    width:100%;
+}
+
+.frame{
+    z-index: 30;
+    display: block;
+    margin-left: 39%;
+    position: absolute;
+}
+
+.animation{
+    z-index: 10;
+    position: absolute;
+}
+
+.Btn{
+margin-top: 1%;
+margin-left: 95%;
+border: none;
+background-color: transparent;
+position: relative;
+z-index: 15;
+}
+
+.Btn:hover{
+    opacity: 0.6;
+}
+
+.add{
+    z-index: 15;
+    background-color: transparent;
+    border:1px solid white;
+    margin-left: -55%;
+    margin-top: 34%;
+    position: absolute;
+    color: white;
+    width: 15%;
+    padding: 3px;
+}
+strong{
+    padding: 6%;
+
+} 

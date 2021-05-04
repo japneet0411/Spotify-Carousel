@@ -1,0 +1,8 @@
+$bgcolour: #FADAA3;
+
+#canvas {
+  background: $bgcolour;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
