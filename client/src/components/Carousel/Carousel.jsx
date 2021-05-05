@@ -4,12 +4,8 @@ import { Carousel } from 'react-responsive-carousel';
 import PlayASong from './../Main-Modal/Main-Modal';
 import './Carousel.css';
 import './Carousel.scss';
-<<<<<<< HEAD
 import Items from './../Carousel-Items/Carousel-Items';
-=======
-import Items from './../Items/Carousel-items';
-
->>>>>>> bf084e9eb1b6679d59aba16fb6584d4888567625
+import Bar from './../Navbar/navbar';
 //import Image1 from './../../images/Image1.jpg';
 
 const axios = require('axios');
@@ -22,7 +18,7 @@ class DemoCarousel extends Component {
             showModal: false,
             changing: false,
             current: 0,
-            carousel: [],
+            carousel: []
         }
     }
     componentDidMount(){
@@ -42,7 +38,7 @@ class DemoCarousel extends Component {
         this.setState({
             showModal: false,
             slideshow: true,
-            changing: false
+            changing: false,
         });
         console.log("Handled close");
     }
@@ -51,7 +47,7 @@ class DemoCarousel extends Component {
             this.setState({
                 slideshow: false,
                 showModal: true,
-                current: selectedIndex
+                current: selectedIndex,
             });
         }
         else{
@@ -78,7 +74,7 @@ class DemoCarousel extends Component {
         }
 
         return (
-            <div id="Carousel">
+            <div id="Carousel" className='standard-size'>
             
             {this.state.showModal && (
             <PlayASong 
@@ -88,6 +84,8 @@ class DemoCarousel extends Component {
             index={this.state.carousel[this.state.current].name}
             />)}
             {items.length>0 && (
+            <div>
+            <Bar modalOpen={this.state.showModal}/>
             <Carousel 
             autofocus = {true}
             autoPlay = {true}
@@ -104,6 +102,7 @@ class DemoCarousel extends Component {
             >
                 {items}
             </Carousel>
+            </div>
             )}
             </div>
         );

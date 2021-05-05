@@ -35,7 +35,7 @@ z-index: 15;
     background-color: transparent;
     border:1px solid white;
     margin-left: -57%;
-    margin-top: 35%;
+    margin-top: 38%;
     position: absolute;
     color: white;
     width: 10%;
@@ -53,7 +53,14 @@ z-index: 15;
     font-size: smaller;
     padding: 3px;
     margin-left: -46%;
-    margin-top: 35%;
+    margin-top: 38%;
+}
+
+.toggle{
+    z-index: 15;
+    position: absolute;
+    margin-left: 96%;
+    margin-top:-35px;
 }
 
 strong{

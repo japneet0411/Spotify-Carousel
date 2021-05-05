@@ -1,44 +1,22 @@
-import React, { Component ,useState} from "react"
+import React, { Component } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPalette, faTimes } from '@fortawesome/free-solid-svg-icons'
-<<<<<<< HEAD:client/src/components/Main-Modal/Main-Modal.jsx
-import { faPlusCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-import Canvas from '../Canvas/Canvas';
-=======
-import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
-import Customize from './customize'
-import Canvas from './../canvas/canvas';
->>>>>>> bf084e9eb1b6679d59aba16fb6584d4888567625:client/src/components/Modals/Song.jsx
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import Canvas from '../Canvas/canvas';
 import Modal from 'react-modal';
 import './Main-Modal.scss'
 import './Main-Modal.css'
 import axios from "axios";
-import { Button } from "react-bootstrap";
+import Switch from 'react-switch';
+//import { Button } from "react-bootstrap";
 
 class PlayASong extends Component{
-
   constructor(props){
     super(props);
     this.state = {
-<<<<<<< HEAD:client/src/components/Main-Modal/Main-Modal.jsx
       embed_url: '',
       saved: false
-=======
-      modal: [],
-      showModal: false
->>>>>>> bf084e9eb1b6679d59aba16fb6584d4888567625:client/src/components/Modals/Song.jsx
     }
-  }
-  handleClose = () => {
-    this.setState({
-        showModal: false,
-    });
-}
-
-  onClickEvent= ()=>{
-    this.setState({
-      showModal:true
-    })
   }
 
   componentDidMount(){
@@ -96,7 +74,6 @@ class PlayASong extends Component{
     };
   return(
     <div>
-    
     <Modal
     isOpen={this.props.isOpen}
     onRequestClose={this.props.onRequestClose}
@@ -111,7 +88,6 @@ class PlayASong extends Component{
     </button>
 
     
-
     <iframe className="frame"
       title="Music" 
       src={this.state.embed_url}
@@ -119,29 +95,35 @@ class PlayASong extends Component{
       height="380" 
       frameborder="0" 
       allowtransparency="true" 
-      allow="encrypted-media"
-      
+      allow="encrypted-media" 
     > 
   </iframe>
-  
-  <button className="add" onClick={this.saveTrack}>
+
+  {/*<Switch 
+      className="toggle"  
+      checkedIcon={false} 
+      uncheckedIcon={false}
+      width={50}
+      height={25}
+      onColor={'#1681FF'}
+      offColor={'#CFCFCF'}
+  /> */}
+ 
+    <button className="add">
     <FontAwesomeIcon icon={faPlusCircle} size="2x" style={{color: "white"}} /> 
     <br></br>        
-     <strong>Save Track</strong>
+    <Switch />
      </button>
     
 
-  <button className="customise" onClick={this.onClickEvent}>
+  <button className="customise">
     <FontAwesomeIcon icon={faPalette} size="2x" style={{color: "white"}} /> 
     <br></br>        
      <strong>Customize</strong>
      </button>
 
+
     </Modal>
-    <Customize
-      isOpen={this.state.showModal}
-      onRequestClose={this.handleClose}
-    />
     </div>
  
   )
