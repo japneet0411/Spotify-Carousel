@@ -1,8 +1,17 @@
-  
-.navbar{
-    z-index: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+.nav-link{
+        font-size:1.2rem!important;
+        color: azure !important;
+        margin-left: 70%;
+        width: 30%;
+        font-family: 'Roboto', sans-serif !important;
+
+}
+.nav-link:hover{
+    color:#d8e3e7 !important;
+    opacity: 0.8 !important;
+}
 .navbar-toggler-icon{
     color:white !important;
     
@@ -12,4 +21,15 @@
     border-radius: 100% !important;
     background-color: black !important;
     padding: 5px !important;
+}
+
+.Line{
+    background-color: white;
+    height: 1px;
+}
+.toggle{
+    position: absolute;
+    margin-left: 92%;
+    margin-top:-35px;
+
 }

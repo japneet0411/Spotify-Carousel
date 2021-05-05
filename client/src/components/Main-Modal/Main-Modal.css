@@ -1,6 +1,7 @@
 .Modal{
     height:100vh;
     width:100%;
+
 }
 
 .frame{
@@ -13,6 +14,7 @@
 .animation{
     z-index: 10;
     position: absolute;
+    background-color: black;
 }
 
 .Btn{
@@ -32,12 +34,13 @@ z-index: 15;
     z-index: 15;
     background-color: transparent;
     border:1px solid white;
-    margin-left: -55%;
-    margin-top: 34%;
+    margin-left: -57%;
+    margin-top: 35%;
     position: absolute;
     color: white;
-    width: 15%;
+    width: 10%;
     padding: 3px;
+    font-size: smaller;
 }
 
 .customise{
@@ -50,7 +53,7 @@ z-index: 15;
     font-size: smaller;
     padding: 3px;
     margin-left: -46%;
-    margin-top: 37%;
+    margin-top: 35%;
 }
 
 strong{

@@ -4,7 +4,12 @@ import { Carousel } from 'react-responsive-carousel';
 import PlayASong from './../Main-Modal/Main-Modal';
 import './Carousel.css';
 import './Carousel.scss';
+<<<<<<< HEAD
 import Items from './../Carousel-Items/Carousel-Items';
+=======
+import Items from './../Items/Carousel-items';
+
+>>>>>>> bf084e9eb1b6679d59aba16fb6584d4888567625
 //import Image1 from './../../images/Image1.jpg';
 
 const axios = require('axios');
@@ -73,7 +78,8 @@ class DemoCarousel extends Component {
         }
 
         return (
-            <div>
+            <div id="Carousel">
+            
             {this.state.showModal && (
             <PlayASong 
             isOpen={this.state.showModal}

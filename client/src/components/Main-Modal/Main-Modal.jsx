@@ -1,8 +1,14 @@
-import React, { Component } from "react"
+import React, { Component ,useState} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPalette, faTimes } from '@fortawesome/free-solid-svg-icons'
+<<<<<<< HEAD:client/src/components/Main-Modal/Main-Modal.jsx
 import { faPlusCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import Canvas from '../Canvas/Canvas';
+=======
+import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+import Customize from './customize'
+import Canvas from './../canvas/canvas';
+>>>>>>> bf084e9eb1b6679d59aba16fb6584d4888567625:client/src/components/Modals/Song.jsx
 import Modal from 'react-modal';
 import './Main-Modal.scss'
 import './Main-Modal.css'
@@ -10,12 +16,29 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 
 class PlayASong extends Component{
+
   constructor(props){
     super(props);
     this.state = {
+<<<<<<< HEAD:client/src/components/Main-Modal/Main-Modal.jsx
       embed_url: '',
       saved: false
+=======
+      modal: [],
+      showModal: false
+>>>>>>> bf084e9eb1b6679d59aba16fb6584d4888567625:client/src/components/Modals/Song.jsx
     }
+  }
+  handleClose = () => {
+    this.setState({
+        showModal: false,
+    });
+}
+
+  onClickEvent= ()=>{
+    this.setState({
+      showModal:true
+    })
   }
 
   componentDidMount(){
@@ -73,6 +96,7 @@ class PlayASong extends Component{
     };
   return(
     <div>
+    
     <Modal
     isOpen={this.props.isOpen}
     onRequestClose={this.props.onRequestClose}
@@ -107,13 +131,17 @@ class PlayASong extends Component{
      </button>
     
 
-  <button className="customise">
+  <button className="customise" onClick={this.onClickEvent}>
     <FontAwesomeIcon icon={faPalette} size="2x" style={{color: "white"}} /> 
     <br></br>        
      <strong>Customize</strong>
      </button>
 
     </Modal>
+    <Customize
+      isOpen={this.state.showModal}
+      onRequestClose={this.handleClose}
+    />
     </div>
  
   )

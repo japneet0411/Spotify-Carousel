@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import './canvas.css'
 
 const Canvas = props => {
   
@@ -90,7 +91,7 @@ const Canvas = props => {
         height = canvas.height = window.innerHeight;
     }});
   
-  return <canvas ref={canvasRef} {...props} />
+  return <canvas id="canvas" ref={canvasRef} {...props} />
 }
 
 export default Canvas
