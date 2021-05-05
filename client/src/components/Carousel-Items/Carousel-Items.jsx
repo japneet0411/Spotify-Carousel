@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import './Carousel-items.scss'
-import './Carousel-items.css'
+import './Carousel-Items.scss'
+import './Carousel-Items.css'
 
 
 function Items(props){

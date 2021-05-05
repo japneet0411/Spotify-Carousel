@@ -39,6 +39,16 @@ export const fetchData = async(req, res) => {
             seedTracks: [],
             listOfTracks: []
         });
+        if (empty(spotifyApi.getAccessToken())){
+            await spotifyApi
+            .clientCredentialsGrant()
+            .then((data) => {
+              spotifyApi.setAccessToken(data.body['access_token']);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }
         for(var j=0; j<tracks.length; j++){
             await spotifyApi
                 .searchTracks('track:'+tracks[j].track+' artist:'+tracks[j].artist, { limit: 1 })

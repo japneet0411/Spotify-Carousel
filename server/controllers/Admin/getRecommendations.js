@@ -1,9 +1,20 @@
 import { spotifyApi } from '../appAuth';
 import { playlistsModel } from './../../models/playlists';
+const empty = require('is-empty');
 
 export const getRecommendations = async(req, res) => {
+    if (empty(spotifyApi.getAccessToken())){
+        await spotifyApi
+        .clientCredentialsGrant()
+        .then((data) => {
+          spotifyApi.setAccessToken(data.body['access_token']);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
     const playlists = await playlistsModel.find({}).exec();
-    for(var i=2; i<playlists.length; i++){
+    for(var i=0; i<playlists.length; i++){
         console.log(i);
         await spotifyApi
             .getRecommendations({

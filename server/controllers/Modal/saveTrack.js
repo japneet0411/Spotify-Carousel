@@ -1,12 +1,24 @@
 import { spotifyApi } from './../appAuth';
 import { tracksModel } from './../../models/tracks';
 import { usersModel } from './../../models/users';
+const empty = require('is-empty');
 
 export const saveTrack = async(req, res) => {
-    const query = tracksModel.findOne({
-        trackId: req.params.trackId
-    }).exec();
-    if(query){
+    if (empty(spotifyApi.getAccessToken())){
+        await spotifyApi
+        .clientCredentialsGrant()
+        .then((data) => {
+          spotifyApi.setAccessToken(data.body['access_token']);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+    const userQuery = await usersModel.findOne({
+        username: req.params.username
+    });
+    const savedTracks = userQuery.savedTracks;
+    if(savedTracks.indexOf(req.body.trackId)==-1){
         await usersModel.findOneAndUpdate({
             username: req.params.username,
         }, {
@@ -14,15 +26,8 @@ export const saveTrack = async(req, res) => {
                 savedTracks: req.body.trackId
             }
         }).exec();
-        await tracksModel.findOneAndUpdate({
-            track_id: req.params.track_id
-        }, {
-            savedBy: query.savedBy+1
-        }).exec();
-    }
-    else{
         await spotifyApi
-            .getTrack(req.params.track_id)
+            .getTrack(req.body.trackId)
             .then(async(data) => {
                 var result = data.body;
                 await tracksModel.create({
@@ -37,5 +42,17 @@ export const saveTrack = async(req, res) => {
             .catch((err) => {
                 console.log(err);
         });
+    }
+    else{
+        const query = await tracksModel.findOne({
+            trackId: req.body.trackId
+        }).exec();
+        console.log("Query", query);
+        const result = await tracksModel.findOneAndUpdate({
+            trackId: req.body.trackId
+        }, {
+            savedBy: query.savedBy+1
+        }).exec();
+        console.log("Result", result);
     }
 }

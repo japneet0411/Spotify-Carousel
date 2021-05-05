@@ -1,6 +1,17 @@
 import { spotifyApi } from './../appAuth';
+const empty = require('is-empty');
 
 export const recommendTrack = async(req, res) => {
+    if (empty(spotifyApi.getAccessToken())){
+        await spotifyApi
+        .clientCredentialsGrant()
+        .then((data) => {
+          spotifyApi.setAccessToken(data.body['access_token']);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
     const track = req.params.track;
     spotifyApi
         .getAudioFeaturesForTrack(track)

@@ -1,7 +1,18 @@
 import { usersModel } from './../../models/users';
 import { spotifyApi } from './../appAuth';
+const empty = require('is-empty');
 
 export const savedForLater = async(req, res) => {
+    if (empty(spotifyApi.getAccessToken())){
+        await spotifyApi
+        .clientCredentialsGrant()
+        .then((data) => {
+          spotifyApi.setAccessToken(data.body['access_token']);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
     const query = await usersModel.findOne({
         username: req.params.username
     });

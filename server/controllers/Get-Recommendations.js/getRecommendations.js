@@ -2,8 +2,19 @@ import { usersModel } from './../../models/users';
 import { tracksModel } from './../../models/tracks';
 import { spotifyApi } from './../appAuth';
 import randomItem from 'random-item';
+const empty = require('is-empty');
 
 export const getRecommendations = async(req, res) => {
+    if (empty(spotifyApi.getAccessToken())){
+        await spotifyApi
+        .clientCredentialsGrant()
+        .then((data) => {
+          spotifyApi.setAccessToken(data.body['access_token']);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
     const query = await usersModel.findOne({
         username: req.params.username
     });

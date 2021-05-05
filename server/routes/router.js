@@ -8,10 +8,9 @@ import { setImages } from './../controllers/Admin/setImages';
 import { getRecommendations } from './../controllers/Admin/getRecommendations';
 import { carousel } from './../controllers/Carousel/carousel';
 import { modal } from './../controllers/Modal/modal';
-
-router
-    .route('/admin')
-    .get(appAuth);
+import { createUser } from './../controllers/User-Auth/createNewUser';
+import { saveTrack } from './../controllers/Modal/saveTrack';
+import { wallOfMusic } from './../controllers/Wall-Of-Music/wallOfMusic';
 router  
     .route('/scraper')
     .post(fetchData)
@@ -27,3 +26,12 @@ router
 router
     .route('/modal/:playlist')
     .get(modal);
+router
+    .route('/create-user')
+    .post(createUser);
+router
+    .route('/:username/saveTrack')
+    .post(saveTrack);
+router
+    .route('/:username/wallOfMusic')
+    .get(wallOfMusic);

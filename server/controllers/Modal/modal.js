@@ -7,9 +7,13 @@ export const modal = async(req, res) => {
     const listOfTracks = playlist[0].listOfTracks;
     //const query = await usersModel.findOne({ username: req.params.username });
     //const explicit = query.explicit;
-    console.log("The count is: ",listOfTracks);
+    //console.log("The count is: ",listOfTracks);
     var track = randomItem(listOfTracks);
-    var count=0;
+    var saved = false;
+    //const savedTracks = query.savedTracks;
+    //if(!(savedTracks.indexOf(track)===-1))
+    //  saved = true;
+    //var count=0;
     /*if(explicit){
         while(track.explicit && count!=20){
             track = randomItem(listOfTracks);
@@ -21,6 +25,7 @@ export const modal = async(req, res) => {
         }
     }*/
     res.status(200).send({
-        embed_url: "https://open.spotify.com/embed/track/"+track
+        embed_url: "https://open.spotify.com/embed/track/"+track,
+        saved: saved
     });
 }

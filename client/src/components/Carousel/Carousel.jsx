@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import PlayASong from './../Modals/Song';
+import PlayASong from './../Main-Modal/Main-Modal';
 import './Carousel.css';
 import './Carousel.scss';
-import Items from './../Items/Carousel-items';
+import Items from './../Carousel-Items/Carousel-Items';
 //import Image1 from './../../images/Image1.jpg';
 
 const axios = require('axios');
@@ -39,6 +39,7 @@ class DemoCarousel extends Component {
             slideshow: true,
             changing: false
         });
+        console.log("Handled close");
     }
     onClickItemEvent = (selectedIndex) => {
         if(this.state.changing===false){

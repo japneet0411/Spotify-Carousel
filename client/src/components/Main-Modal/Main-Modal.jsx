@@ -1,20 +1,20 @@
 import React, { Component } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPalette, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
-import Canvas from './../canvas/canvas';
+import { faPlusCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import Canvas from '../Canvas/Canvas';
 import Modal from 'react-modal';
-import './Song.scss'
-import './Song.css'
+import './Main-Modal.scss'
+import './Main-Modal.css'
 import axios from "axios";
-
-
+import { Button } from "react-bootstrap";
 
 class PlayASong extends Component{
   constructor(props){
     super(props);
     this.state = {
-      modal: []
+      embed_url: '',
+      saved: false
     }
   }
 
@@ -23,14 +23,47 @@ class PlayASong extends Component{
       .get('http://localhost:5000/modal/'+this.props.index)
       .then((response) => {
         this.setState({
-          modal: response.data
+          embed_url: response.data.embed_url,
+          saved: response.data.saved
         });
-        console.log(this.state.modal);
       })
       .catch((err) => {
         console.log(err)
       });
     }
+
+    saveTrack = () => {
+      console.log("Save track");
+      axios
+        .post('http://localhost:5000/guest/saveTrack', {
+          trackId: this.state.embed_url.replace("https://open.spotify.com/embed/track/", "")
+        })
+        .then(() => {
+          this.setState({
+            saved: true
+          });
+          console.log(this.state.saved);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  
+    unsaveTrack = () => {
+      console.log("Unsave track");
+        axios
+          .post('http://localhost:5000/guest/saveTrack', {
+            trackId: this.state.embed_url.replace("https://open.spotify.com/embed/track/", "")
+          })
+          .then(() => {
+            this.setState({
+              saved: false
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        }
 
   render(){
     const customStyles = {
@@ -57,7 +90,7 @@ class PlayASong extends Component{
 
     <iframe className="frame"
       title="Music" 
-      src={this.state.modal.embed_url}
+      src={this.state.embed_url}
       width="300" 
       height="380" 
       frameborder="0" 
@@ -67,11 +100,12 @@ class PlayASong extends Component{
     > 
   </iframe>
   
-  <button className="add">
-    <FontAwesomeIcon icon={faPlusCircle} size="2x" style={{color: "white"}} />  
-    <br></br>    
-     <strong>Add to Playlist</strong>
+  <button className="add" onClick={this.saveTrack}>
+    <FontAwesomeIcon icon={faPlusCircle} size="2x" style={{color: "white"}} /> 
+    <br></br>        
+     <strong>Save Track</strong>
      </button>
+    
 
   <button className="customise">
     <FontAwesomeIcon icon={faPalette} size="2x" style={{color: "white"}} /> 
