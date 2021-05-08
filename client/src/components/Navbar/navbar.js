@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
+import { Link } from 'react-router-dom';
 import {Navbar,Nav} from 'react-bootstrap'
 import Switch from "react-switch";
 import './navbar.css'
 import './Navbar.scss'
+import axios from 'axios';
 
 function Bar(props)
 {
 const[checked,handleChange]=useState(true);
 const [expanded, setExpanded] = useState(false);
-
 
 
  function Change(){
@@ -17,10 +18,16 @@ const [expanded, setExpanded] = useState(false);
           handleChange(false);
     else
           handleChange(true);
+      axios
+            .post('http://localhost:5000/guest/explicit', {
+                  explicit: checked
+            });
+      window.location.reload();
     }
 
 return( 
-
+      <div>
+      
 <Navbar collapseOnSelect expand="false" bg="dark" variant="dark" expanded={!(props.modalOpen) && expanded}
   >
   <Navbar.Brand href="#home">App Name</Navbar.Brand>
@@ -29,11 +36,10 @@ return(
   <Navbar.Collapse id="responsive-navbar-nav">
   <hr class="Line"></hr>
   <Nav className="px-1" style={{ textAlign: 'right' }}>
-  <Nav.Link href="#" onClick={() => setExpanded(false)}>Carousel</Nav.Link>
-  <Nav.Link href="#" onClick={() => setExpanded(false)}>Wall of Music</Nav.Link>
-  <Nav.Link href="#" onClick={() => setExpanded(false)}>Get Recommendations</Nav.Link>
-  <Nav.Link href="#" onClick={() => setExpanded(false)}>Tracks Saved for Later</Nav.Link>
-  <Nav.Link href="#" onClick={() => setExpanded(false)}>Saved Playlists</Nav.Link>
+  <Nav.Link href="#" onClick={() => setExpanded(false)}><Link className='regular' to='/'>Carousel</Link></Nav.Link>
+  <Nav.Link href="#" onClick={() => setExpanded(false)}><Link className='regular' to='/wallOfMusic'>Wall of Music</Link></Nav.Link>
+  <Nav.Link href="#" onClick={() => setExpanded(false)}><Link className='regular' to='/getRecommendations'>Get Recommendations</Link></Nav.Link>
+  <Nav.Link href="#" onClick={() => setExpanded(false)}><Link className='regular' to='/savedPlaylists'>Saved Playlists</Link></Nav.Link>
   <Nav.Link href="#" onClick={() => setExpanded(false)} style={{ marginLeft: '65%'}}>Explicit Tracks </Nav.Link>
       <Switch 
       className="toggle" 
@@ -51,6 +57,6 @@ return(
   </Nav>
   </Navbar.Collapse>
 </Navbar>
-
+</div>
 )}
 export default Bar;

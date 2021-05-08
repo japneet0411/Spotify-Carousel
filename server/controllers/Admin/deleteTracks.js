@@ -5,11 +5,11 @@ export const deleteTracks = async(req, res) => {
     var toDelete = [];
     for(var i=0; i<tracks.length; i++){
         if(tracks[i].savedBy===0 && tracks[i].recommendedTo===0)
-            toDelete.push(tracks[i].track_id);
+            toDelete.push(tracks[i].trackId);
     }
     for(var i=0; i<toDelete.length; i++){
         await tracksModel.findOneAndDelete({
-            track_id: toDelete[i]
+            trackId: toDelete[i]
         });
     }
     res.status(200).send("Deleted unused track details");

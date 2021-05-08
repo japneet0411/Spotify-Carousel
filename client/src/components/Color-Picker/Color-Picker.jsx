@@ -1,13 +1,12 @@
 import React,{ useState } from 'react';
 import { SketchPicker } from 'react-color';
-import './colorPicker.css'
+import './Color-Picker.css'
 
 
 
-function Color()
+function Color(props)
 {
     const [open,setOpen]=useState(false);
-    const [color,setColor]=useState({r:'199',g:'21',b:'133',a:'1'})
     function show()
     {
         if((open)===true)
@@ -18,14 +17,17 @@ function Color()
     function colorPicker(color)
     {
         console.log(color)
-        setColor(color.rgb)
-       
+        props.setColor(color.hex) 
     }
-    
     return(
-     <div className="color-picker" onClick={show}
-      style={{backgroundColor: `rgba(${color.r }, ${color.g }, ${color.b }, ${color.a })`}}>
-      {open && <SketchPicker color={color} onChange={colorPicker}/>}
+        <div style={{ margin: '10%'}}>
+            <div style={{ display: 'inline-block', fontSize: '1.5rem'}}>{props.text}</div>
+            &nbsp;&nbsp;&nbsp;
+            <div onClick={show} style={{backgroundColor: props.color, display: 'inline-block'}} className="color-picker">
+            {open && (<SketchPicker color={props.color} onChange={colorPicker}/>)}
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <div style={{display: 'inline-block', fontSize: '1rem'}}>{props.color}</div>
        </div>
      
     )

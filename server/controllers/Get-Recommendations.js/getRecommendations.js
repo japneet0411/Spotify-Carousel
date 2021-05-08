@@ -4,7 +4,7 @@ import { spotifyApi } from './../appAuth';
 import randomItem from 'random-item';
 const empty = require('is-empty');
 
-export const getRecommendations = async(req, res) => {
+export const getRecommendations = async(username) => {
     if (empty(spotifyApi.getAccessToken())){
         await spotifyApi
         .clientCredentialsGrant()
@@ -16,10 +16,26 @@ export const getRecommendations = async(req, res) => {
         });
     }
     const query = await usersModel.findOne({
-        username: req.params.username
-    });
+        username: username
+    }).exec();
     const tracks = query.savedTracks;
-    const seedTracks = [];
+    const currentRecommended = query.recommendedTracks;
+    for(var i=0; i<currentRecommended.length; i++){
+        var track = await tracksModel.findOne({
+            trackId: currentRecommended[i]
+        }).exec();
+        await tracksModel.findOneAndUpdate({
+            trackId: currentRecommended[i]
+        }, {
+            recommendedTo: track.recommendedTo-1
+        }).exec();
+    }
+    await usersModel.findOneAndUpdate({
+        username: username
+    }, {
+        recommendedTracks: []
+    }).exec();
+    var seedTracks = [];
     for(var i=0; i<5; i++){
         seedTracks.push(randomItem(tracks));
     }
@@ -28,13 +44,13 @@ export const getRecommendations = async(req, res) => {
                 seed_tracks: seedTracks,
                 min_popularity: 50,
                 target_popularity: 85,
-                limit: 5
+                limit: 20
             })
             .then(async(data) => {
                 for(var j=0; j<data.body.tracks.length; j++){
                     console.log(data.body.tracks[j].id);
                     await usersModel.findOneAndUpdate({
-                        username: req.params.username
+                        username: username
                     },{
                         $push: {
                             recommendedTracks: data.body.tracks[j].id

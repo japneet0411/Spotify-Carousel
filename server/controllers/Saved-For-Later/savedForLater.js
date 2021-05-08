@@ -15,31 +15,23 @@ export const savedForLater = async(req, res) => {
     }
     const query = await usersModel.findOne({
         username: req.params.username
-    });
+    }).exec();
     const tracks = query.savedForLater;
-    const promiseArray =[];
-    for(var i=0; i<tracks.length; i++){
-        promiseArray += 
-            await spotifyApi
-                .getTrack(tracks[i])
-                .then((data) => {
-                    return {
-                        name: data.body.name,
-                        artist: data.body.artists[0].name
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        var trackList = [];
-        Promise
-            .all(promiseArray)
-            .then((values) => {
-                trackList.push(values);
-                res.status(200).send(trackList);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+    if(tracks.indexOf(req.body.trackId)===-1){
+        await usersModel.findOneAndUpdate({
+            username: req.params.username
+        }, {
+            $push: {
+                savedForLater: req.body.trackId
+            }
+        }).exec();
+        res.status(200).send({
+            message: "Track has been added to your saved for later playlist"
+        });
+    }
+    else{
+        res.status(200).send({
+            message: "This track is already present in your saved for later playlist"
+        });
     }
 }

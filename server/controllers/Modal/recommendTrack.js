@@ -1,4 +1,6 @@
 import { spotifyApi } from './../appAuth';
+import randomItem from 'random-item';
+import { usersModel } from './../../models/users';
 const empty = require('is-empty');
 
 export const recommendTrack = async(req, res) => {
@@ -12,7 +14,10 @@ export const recommendTrack = async(req, res) => {
             console.log(err);
         });
     }
-    const track = req.params.track;
+    const track = req.body.trackId;
+    const query = await usersModel.findOne({
+        username: req.params.username
+    }).exec();
     spotifyApi
         .getAudioFeaturesForTrack(track)
         .then((data) => {
@@ -30,29 +35,29 @@ export const recommendTrack = async(req, res) => {
             const valence = response.valence;
             spotifyApi
                 .getRecommendations({
-                    min_acousticness: acousticness-0.1,
-                    max_acousticness: acousticness+0.1,
+                    min_acousticness: acousticness-0.25,
+                    max_acousticness: acousticness+0.25,
                     target_acousticness: acousticness,
-                    min_danceability: danceability-0.1,
-                    max_danceability: danceability+0.1,
+                    min_danceability: danceability-0.25,
+                    max_danceability: danceability+0.25,
                     target_danceability: danceability,
-                    min_energy: energy-0.1,
-                    max_energy: energy+0.1,
+                    min_energy: energy-0.25,
+                    max_energy: energy+0.25,
                     target_energy: energy,
-                    min_instrumentalness: instrumentalness-0.1,
-                    max_instrumentalness: instrumentalness+0.1,
+                    min_instrumentalness: instrumentalness-0.25,
+                    max_instrumentalness: instrumentalness+0.25,
                     target_instrumentalness: instrumentalness,
                     key: key,
-                    min_liveness: liveness-0.1,
-                    max_liveness: liveness+0.1,
+                    min_liveness: liveness-0.25,
+                    max_liveness: liveness+0.25,
                     target_liveness: liveness,
                     target_loudness: loudness,
                     target_mode: mode,
                     min_popularity: 50,
                     max_popularity: 100,
                     target_popularity: 75,
-                    min_speechiness: speechiness-0.1,
-                    max_speechiness: speechiness+0.1,
+                    min_speechiness: speechiness-0.25,
+                    max_speechiness: speechiness+0.25,
                     target_speechiness: speechiness,
                     target_tempo: tempo,
                     target_valence: valence,
@@ -60,15 +65,21 @@ export const recommendTrack = async(req, res) => {
                     limit: 5
                 })
                 .then((data) => {
-                    var recommendedTracks = [];
-                    for(var i=0; i<data.body.tracks.length; i++){
-                        recommendedTracks.push({
-                            name: data.body.tracks[i].name,
-                            artist: data.body.tracks[i].artists[0].name,
-                            track_id: data.body.tracks[i].id
-                        });
+                    var count=0;
+                    var track = randomItem(data.body.tracks);
+                    while((track.explicit===query.explicit) && count!=5){
+                        track = randomItem(data.body.tracks);
+                        count+=1;
                     }
-                    res.status(200).send(recommendedTracks);
+                    //console.log(track);
+                    var recommendedTrack = {
+                        name: track.name,
+                        artist: track.artists[0].name,
+                        trackId: track.id,
+                        album: track.album.images[0].url,
+                        message: "Success"
+                    };
+                    res.status(200).send(recommendedTrack);
                 })
                 .catch((err) => {
                     console.log(err);

@@ -5,5 +5,5 @@ export const explicitStatus = async(req, res) => {
         username: req.params.username
     }, {
         explicit: req.body.explicit
-    });
+    }).exec();
 }

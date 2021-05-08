@@ -6,7 +6,6 @@ import './Carousel.css';
 import './Carousel.scss';
 import Items from './../Carousel-Items/Carousel-Items';
 import Bar from './../Navbar/navbar';
-//import Image1 from './../../images/Image1.jpg';
 
 const axios = require('axios');
 
@@ -23,7 +22,7 @@ class DemoCarousel extends Component {
     }
     componentDidMount(){
         axios
-            .get('http://localhost:5000/carousel')
+            .get('http://localhost:5000/guest/carousel')
             .then((response) => {
                 this.setState({
                     carousel: response.data
@@ -43,18 +42,18 @@ class DemoCarousel extends Component {
         console.log("Handled close");
     }
     onClickItemEvent = (selectedIndex) => {
-        if(this.state.changing===false){
-            this.setState({
-                slideshow: false,
-                showModal: true,
-                current: selectedIndex,
-            });
-        }
-        else{
-            this.setState({
-                changing: false
-            });
-        }
+            if(this.state.changing===false){
+                this.setState({
+                    slideshow: false,
+                    showModal: true,
+                    current: selectedIndex,
+                });
+            }
+            else{
+                this.setState({
+                    changing: false
+                });
+            }
     }
     onChangeEvent = (selectedIndex) => {
         this.setState({

@@ -1,20 +1,19 @@
 import React, { Component } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPalette, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { faPlusCircle, faCheckCircle, faMusic } from '@fortawesome/free-solid-svg-icons'
-import Customize from './customize'
+import { faPalette, faTimes, faMusic } from '@fortawesome/free-solid-svg-icons'
+//import { faPlusCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import Customize from './../Main-Modal/customize';
 import Canvas from '../Canvas/canvas';
 import Modal from 'react-modal';
-import './Main-Modal.scss'
-import './Main-Modal.css'
+import './Track-Modal.scss'
+import './Track-Modal.css'
 import axios from "axios";
 import Swal from 'sweetalert2';
 import Lottie from 'react-lottie'
 import animationData from './../../lotties/carousel-loading.json';
-import { Button } from 'react-bootstrap';
 //import Switch from 'react-switch';
 
-class PlayASong extends Component{
+class TrackModal extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -24,78 +23,40 @@ class PlayASong extends Component{
       color2:'#ffffff',
       color3:'#ffffff',
       color4:'#000000',
-      icon: faPlusCircle,
-      text: "Save Track",
       embed_url: '',
-      saved: false,
       loaded: false
     }
   }
 
   componentDidMount(){
-    axios
-      .get('http://localhost:5000/guest/modal/'+this.props.index)
-      .then((response) => {
-        //console.log(response);
         this.setState({
-          embed_url: response.data.embed_url,
-          saved: response.data.saved
+            embed_url: this.props.embedUrl
         });
-      })
-      .catch((err) => {
-        console.log(err)
-      });
     }
 
-  handleClose = () => {
+    setColor1=(color1)=>{
+      this.setState({color1:color1})
+    }
+    setColor2=(color2)=>{
+      this.setState({color2:color2})
+    }
+    setColor3=(color3)=>{
+      this.setState({color3:color3})
+    }
+    setColor4=(color4)=>{
+      this.setState({color4:color4})
+    }
+
+    handleClose = () => {
       this.setState({
           showModal: false,
       });
-  }
-
-  setColor1=(color1)=>{
-    this.setState({color1:color1})
-  }
-  setColor2=(color2)=>{
-    this.setState({color2:color2})
-  }
-  setColor3=(color3)=>{
-    this.setState({color3:color3})
-  }
-  setColor4=(color4)=>{
-    this.setState({color4:color4})
   }
 
   onClickEvent= ()=>{
     this.setState({
       showModal:true
     })
-  }
-
-  trackSaveStatus = () => {
-    console.log("In track save status");
-    if(this.state.saved){
-      axios
-      .post('http://localhost:5000/guest/removeSavedTrack', {
-        trackId: this.state.embed_url.replace("https://open.spotify.com/embed/track/", "")
-      });
-      this.setState({
-        saved: false,
-        text: 'Save Track',
-        icon: faPlusCircle
-      });
-    }
-    else{
-      axios
-      .post('http://localhost:5000/guest/saveTrack', {
-        trackId: this.state.embed_url.replace("https://open.spotify.com/embed/track/", "")
-      });
-      this.setState({
-        saved: true,
-        text: 'Saved',
-        icon: faCheckCircle
-      });
-    }
   }
 
   getSimilarTracks = () => {
@@ -111,14 +72,20 @@ class PlayASong extends Component{
         imageHeight: 200,
         imageWidth: 200,
         html: html,
-        confirmButtonText: 'Play Track',
-        showCloseButton: true
+        confirmButtonText: 'Check Out Later'
       })
       .then((result) => {
         if(result.isConfirmed){
-          this.setState({
-            embed_url: 'https://open.spotify.com/embed/track/'+response.data.trackId
-          });
+          axios
+            .post('http://localhost:5000/guest/saveForLater', {
+              trackId: response.data.trackId
+            })
+            .then((response) => {
+              Swal.fire(response.data.message);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       })
       .catch((err) => {
@@ -153,6 +120,7 @@ class PlayASong extends Component{
     className="Modal"
     style={this.state.loaded? {customStyles} : { display: 'none' }}
     >
+    
     {this.state.loaded ? (
       <Canvas style={this.state.loaded ? {} : { display: 'none' }}
       className='Modal animation'
@@ -176,8 +144,8 @@ class PlayASong extends Component{
     />
   </div>
         )}
-  
- <button className="Btn" onClick={this.props.button} style={this.state.loaded ? {} : { display: 'none' }}>
+
+ <button className="Btn" onClick={this.props.button} style={this.state.loaded? {} : { display: 'none' }}>
       <FontAwesomeIcon icon={faTimes} size="2x" style={{color: "white"}}/>
     </button>
 
@@ -194,20 +162,14 @@ class PlayASong extends Component{
     > 
   </iframe>
   <div className='modal-button'>
-  <button onClick={this.trackSaveStatus} style={this.state.loaded ? {} : { display: 'none' }}>
-    {console.log(this.state.saved, this.state.text, this.state.icon)}
-    <FontAwesomeIcon icon={this.state.icon} size="1x" style={{color: "white"}} />  
-    <br />
-     {this.state.text}
-     </button>
   <button style={this.state.loaded ? {} : { display: 'none' }} onClick={this.onClickEvent}>
     <FontAwesomeIcon icon={faPalette} size="1x" style={{color: "white"}} /> 
-    <br />
+    <br></br>        
      Customize
      </button>
      <button onClick={this.getSimilarTracks} style={this.state.loaded ? {} : { display: 'none' }}>
-    <FontAwesomeIcon icon={faMusic} size="1x" style={{color: "white"}} />   
-    <br />     
+    <FontAwesomeIcon icon={faMusic} size="1x" style={{color: "white"}} /> 
+    <br></br>        
      Similar Tracks
      </button>
      </div>
@@ -230,4 +192,4 @@ class PlayASong extends Component{
   )
 }
 }
-export default PlayASong;
+export default TrackModal;

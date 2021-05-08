@@ -19,7 +19,7 @@ export const getRecommendations = async(req, res) => {
                 seed_tracks: seedTracks,
                 min_popularity: 50,
                 target_popularity: 85,
-                limit: 5
+                limit: 20
             })
             .then(async(data) => {
                 for(var j=0; j<data.body.tracks.length; j++){

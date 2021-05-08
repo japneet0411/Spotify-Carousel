@@ -1,11 +1,15 @@
 import { usersModel } from './../../models/users';
 
 export const savePlaylist = async(req, res) => {
-     await usersModel.findOneAndUpdate({
+     const playlist = await usersModel
+        .findOneAndUpdate({
          username: req.params.username
      }, {
          $push: {
-             savedPlaylist: req.body.playlist
+             savedPlaylists: req.body.playlistName
          }
-     });
+     }).exec();
+     /*res.status(200).send({
+         message: "Success"
+     });*/
 }

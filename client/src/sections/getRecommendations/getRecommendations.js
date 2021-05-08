@@ -2,18 +2,21 @@ import React from 'react';
 import CardLayout from './../../components/Card-Layout/Card-Layout';
 import Bar from './../../components/Navbar/navbar';
 
-function WallOfMusic(){
+function GetRecommendations(){
     return(
         <div>
             <Bar />
             <br />
             <CardLayout 
-            serverURL = {"http://localhost:5000/guest/wallOfMusic"} 
-            heading = {"Wall Of Music"}
+            serverURL = {"http://localhost:5000/guest/getRecommendations"} 
+            heading = {"Recommended For You"}
             subheading = {"Lorem Ipsum Dolor Sit Amet"}
+            type = {'track'}
+            delete = {false}
+            loginWithSpotify = {true}
             />
         </div>
     )
 }
 
-export default WallOfMusic;
+export default GetRecommendations;

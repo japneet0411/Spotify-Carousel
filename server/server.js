@@ -24,10 +24,10 @@ mongoose
         useFindAndModify: false
     })
     .then(() => {
-        console.log("Successfuly connected to MongoDB")
+        console.log("Successfuly connected to MongoDB");
     })
     .catch((err) => {
-        console.log(err);
+        console.log("Waiting to connect to MongoDB");
     });
 
 export const start = () => {

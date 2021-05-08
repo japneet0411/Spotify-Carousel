@@ -2,15 +2,20 @@
 
 .nav-link{
         font-size:1.2rem!important;
-        color: azure !important;
+        color: white !important;
         margin-left: 70%;
         width: 30%;
         font-family: 'Roboto', sans-serif !important;
-
+        text-decoration: none;
+}
+.regular{
+    text-decoration: none;
+    color: white !important;
 }
 .nav-link:hover{
     color:#d8e3e7 !important;
     opacity: 0.8 !important;
+    text-decoration: none;
 }
 .navbar-toggler-icon{
     color:white !important;

@@ -16,7 +16,8 @@ export const wallOfMusic = async(req, res) => {
         trackDetails.push({
             main: track.name,
             subtext: track.artist,
-            image: track.albumCover
+            image: track.albumCover,
+            id: track.trackId
         });
     } 
     console.log(trackDetails);

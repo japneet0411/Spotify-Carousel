@@ -10,9 +10,12 @@ function SavedPlaylists()
             <Bar />
             <br />
             <CardLayout 
-            serverURL = {"http://localhost:5000/guest/wallOfMusic"} 
-            heading = {"Wall Of Music"}
+            serverURL = {"http://localhost:5000/guest/listSavedPlaylists"} 
+            heading = {"Your Saved Playlists"}
             subheading = {"Lorem Ipsum Dolor Sit Amet"}
+            type = {'playlist'}
+            delete = {true}
+            loginWithSpotify = {false}
             />
         </div>
     )

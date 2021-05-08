@@ -19,7 +19,7 @@ const Canvas = props => {
         cy = e.clientY;
     });
 
-    const colours = ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'];
+    const colours = [props.particle1, props.particle2, props.particle3];
     const maxParticles = 800;
     let particles = [];
 
@@ -91,7 +91,7 @@ const Canvas = props => {
         height = canvas.height = window.innerHeight;
     }});
   
-  return <canvas id="canvas" ref={canvasRef} {...props} />
+  return <canvas id="canvas" ref={canvasRef} {...props}  style={{backgroundColor:props.backgroundColor}}/>
 }
 
 export default Canvas

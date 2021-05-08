@@ -1,51 +1,85 @@
 import React, { useState } from "react"
 import './Carousel-Items.scss'
 import './Carousel-Items.css'
-import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-
+import Swal from 'sweetalert2'; 
+import Lottie from 'react-lottie'
+import animationData from './../../lotties/carousel-loading.json';
 
 function Items(props){
   const [loaded, setLoaded] = useState(false);
-  const [saved, setSaved] = useState(props.saved);
-  const [saveText, setSaveText] = useState('Save Track');
+  const [saved, setSaved] = useState(false)
 
-  const savePlaylist = () => {
-    if(saved){
-      setSaved(false);
-      setSaveText('Save Track');
-      axios
-        .post('http://localhost:5000/:username/removeSavedPlaylist', {
-          playlistName: props.title
-        });
-    }
-    else{
-      setSaved(true);
-      setSaveText('Saved');
-      axios
-        .post('http://localhost:5000/:username/savePlaylist', {
-          playlistName: props.title
-        });
-    }
+  const onLoadHandler = async() => {
+    await axios
+      .post('http://localhost:5000/guest/playlistSaveStatus', {
+        playlistName: props.title
+      })
+      .then((response) => {
+        if(response.data.saved)
+          setSaved(true);
+        else
+          setSaved(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setLoaded(true);
   }
 
-return(
-  
+  const handleClick = async() => {
+
+    await axios
+      .post('http://localhost:5000/guest/setPlaylistSaveStatus', {
+        playlistName: props.title
+      })
+      .then((response) => {
+        if(response.data.saved){
+          setSaved(true);
+        }
+        else{
+          setSaved(false);
+        }
+        Swal.fire(response.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
+
+  return(
     <div>
       {loaded ? null : (
         <div
           style={{
-            background: 'black',
+            background: 'white',
             height: '100vh',
-            width: '100%'
-          }}
-        />
+            width: '100%',
+            textAlign: 'center' 
+          }}>
+    <Lottie 
+    options={defaultOptions}
+      height={400}
+      width={400}
+    />
+  </div>
       )}
       <header>
       <img
         style={loaded ? {} : { display: 'none' }}
         src={props.src}
-        onLoad={() => setLoaded(true)}
+        onLoad={onLoadHandler}
         alt='music'
       />
       <section className='header-text'>
@@ -57,7 +91,9 @@ return(
         <br />
       </div>
       <div className='savebutton' style={loaded ? {} : { display: 'none' }}>
-      <Button onClick={savePlaylist} >{saveText}</Button>
+        <button className='btn' onClick={handleClick}>
+          <FontAwesomeIcon icon={saved?faCheckSquare:faPlusSquare} size='2x' style={{ color: 'white' }}/>
+        </button>
       </div>
       </section>
       </header>

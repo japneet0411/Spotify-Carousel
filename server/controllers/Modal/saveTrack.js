@@ -1,6 +1,7 @@
 import { spotifyApi } from './../appAuth';
 import { tracksModel } from './../../models/tracks';
 import { usersModel } from './../../models/users';
+import { getRecommendations } from './../Get-Recommendations.js/getRecommendations';
 const empty = require('is-empty');
 
 export const saveTrack = async(req, res) => {
@@ -14,18 +15,24 @@ export const saveTrack = async(req, res) => {
             console.log(err);
         });
     }
-    const userQuery = await usersModel.findOne({
-        username: req.params.username
-    });
-    const savedTracks = userQuery.savedTracks;
-    if(savedTracks.indexOf(req.body.trackId)==-1){
-        await usersModel.findOneAndUpdate({
-            username: req.params.username,
+    await usersModel.findOneAndUpdate({
+        username: req.params.username,
+    }, {
+        $push: {
+            savedTracks: req.body.trackId
+        }
+    }).exec();
+    const query = await tracksModel.findOne({
+        trackId: req.body.trackId
+    }).exec();
+    if(query){
+        await tracksModel.findOneAndUpdate({
+            trackId: req.body.trackId
         }, {
-            $push: {
-                savedTracks: req.body.trackId
-            }
+            savedBy: query.savedBy+1
         }).exec();
+    }
+    else{
         await spotifyApi
             .getTrack(req.body.trackId)
             .then(async(data) => {
@@ -43,16 +50,5 @@ export const saveTrack = async(req, res) => {
                 console.log(err);
         });
     }
-    else{
-        const query = await tracksModel.findOne({
-            trackId: req.body.trackId
-        }).exec();
-        console.log("Query", query);
-        const result = await tracksModel.findOneAndUpdate({
-            trackId: req.body.trackId
-        }, {
-            savedBy: query.savedBy+1
-        }).exec();
-        console.log("Result", result);
-    }
+    getRecommendations(req.params.username);
 }

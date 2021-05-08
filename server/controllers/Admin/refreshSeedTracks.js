@@ -11,7 +11,7 @@ export const refreshSeedTracks = async(req, res) => {
         }
         console.log(seedTracks);
         await playlistsModel.findOneAndUpdate({
-            name: playlists[i].name
+            playlistName: playlists[i].playlistName
         }, {
             seedTracks: seedTracks
         }).exec();
