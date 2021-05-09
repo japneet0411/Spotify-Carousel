@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {Navbar,Nav} from 'react-bootstrap'
 import Switch from "react-switch";
 import './navbar.css'
-import './Navbar.scss'
+import './navbar.scss'
 import axios from 'axios';
 
 function Bar(props)

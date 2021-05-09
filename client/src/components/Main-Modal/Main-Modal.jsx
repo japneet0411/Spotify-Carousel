@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPalette, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faPlusCircle, faCheckCircle, faMusic } from '@fortawesome/free-solid-svg-icons'
 import Customize from './customize'
-import Canvas from '../Canvas/canvas';
+import Canvas from '../canvas/canvas';
 import Modal from 'react-modal';
 import './Main-Modal.scss'
 import './Main-Modal.css'

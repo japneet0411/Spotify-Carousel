@@ -4,7 +4,7 @@ import Picker from './../Color-Picker/Color-Picker';
 import {faTimes } from '@fortawesome/free-solid-svg-icons'
 import Modal from 'react-modal';
 import './customize.css'
-import Canvas from './../Canvas/canvas';
+import Canvas from './../canvas/canvas';
 
 
 function Customize(props)
