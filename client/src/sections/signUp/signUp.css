@@ -44,12 +44,13 @@ h2{
     width: 100vw;
     overflow-x: hidden;
     overflow-y: hidden;
-    background-color:teal;
+    background-color:rgb(168, 243, 104,0.6);
     font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
 }
 
 .btns{
-    background-color: teal !important;
+    background-color:rgb(168, 243, 104,1);
     padding:8px 20px;
     border-radius: 10px;
     border: 2px solid black !important;

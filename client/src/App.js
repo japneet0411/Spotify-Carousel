@@ -8,6 +8,8 @@ import SavedPlaylists from './sections/savedPlaylists/savedPlaylists';
 import Login from './sections/login/login';
 import SignUp from './sections/signUp/signUp';
 
+import LandingPage from './sections/landingPage/landingPage';
+
 function App() {
   return (
     <div className="App">
@@ -29,7 +31,7 @@ function App() {
         <Login />
       </Route>
       <Route path='/'>
-        <Carousel />
+        <LandingPage />
       </Route>
     </Switch>
     </Router>

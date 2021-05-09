@@ -17,14 +17,14 @@ export const displayRecommendedTracks = async(req, res) => {
         var track = await tracksModel.findOne({
             trackId: tracks[i]
         }).exec();
-        if(track.explicit===query.explicit){
+        
         recommendedTracks.push({
             main: track.name,
             subtext: track.artist,
             image: track.albumCover,
             id: track.trackId,
             message: "Success"
-        });}
+        });
     }
     res.status(200).send(recommendedTracks);
 }
