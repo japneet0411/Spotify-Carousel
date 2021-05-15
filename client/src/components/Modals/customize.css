@@ -1,21 +1,20 @@
-.custom{
-    margin-top: 1%;
-    margin-left: 3%;
-    height:95vh;
-    width:95%;
-    background-color: white;
+.custom {
+	margin-top: 1%;
+	margin-left: 3%;
+	height: 95vh;
+	width: 95%;
+	background-color: white;
 }
 
-.preview{
-    
-    margin-top: -38% !important;
-    margin-left: 50%;
-    height: 450px !important;
-    width:450px !important;
+.preview {
+	margin-top: -38% !important;
+	margin-left: 50%;
+	height: 450px !important;
+	width: 450px !important;
 }
 
-.head{
-    margin-left: 38px;
-    margin-top: 15px;
-    font-weight: bolder;
+.head {
+	margin-left: 38px;
+	margin-top: 15px;
+	font-weight: bolder;
 }

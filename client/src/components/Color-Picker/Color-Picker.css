@@ -1,19 +1,14 @@
-.color-picker{
-   
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    border-radius: 100%;
-    /*margin-left: 20%;
+.color-picker {
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+	border-radius: 100%;
+	/*margin-left: 20%;
   margin-bottom: 90px;
   margin-top: -20px;*/
-
-    
- 
 }
-.sketch-picker{
-  //margin-left: 5%;
-  //margin-top: -10%;
-  position: absolute;
-  
+.sketch-picker {
+	//margin-left: 5%;
+	//margin-top: -10%;
+	position: absolute;
 }

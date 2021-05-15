@@ -1,39 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-.nav-link{
-        font-size:1.2rem!important;
-        color: white !important;
-        margin-left: 70%;
-        width: 30%;
-        font-family: 'Roboto', sans-serif !important;
-        text-decoration: none;
+.nav-link {
+	font-size: 1.2rem !important;
+	color: white !important;
+	margin-left: 70%;
+	width: 30%;
+	font-family: 'Roboto', sans-serif !important;
+	text-decoration: none;
 }
-.regular{
-    text-decoration: none;
-    color: white !important;
+.regular {
+	text-decoration: none;
+	color: white !important;
 }
-.nav-link:hover{
-    color:#d8e3e7 !important;
-    opacity: 0.8 !important;
-    text-decoration: none;
+.nav-link:hover {
+	color: #d8e3e7 !important;
+	opacity: 0.8 !important;
+	text-decoration: none;
 }
-.navbar-toggler-icon{
-    color:white !important;
-    
+.navbar-toggler-icon {
+	color: white !important;
 }
-.navbar-toggler{
-    border: 3px solid white !important;
-    border-radius: 100% !important;
-    background-color: black !important;
-    padding: 5px !important;
+.navbar-toggler {
+	border: 3px solid white !important;
+	border-radius: 100% !important;
+	background-color: black !important;
+	padding: 5px !important;
 }
 
-.Line{
-    background-color: white;
-    height: 1px;
+.Line {
+	background-color: white;
+	height: 1px;
 }
-.toggle{
-    position: absolute;
-    margin-left: 96%;
-    margin-top:-35px;
+.toggle {
+	position: absolute;
+	margin-left: 96%;
+	margin-top: -35px;
 }

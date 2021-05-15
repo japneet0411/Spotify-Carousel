@@ -1,82 +1,80 @@
-.Modal{
-    height:100vh;
-    width:100%;
-
+.Modal {
+	height: 100vh;
+	width: 100%;
 }
 
-.frame{
-    z-index: 30;
-    display: block;
-    margin-left: 39%;
-    position: absolute;
+.frame {
+	z-index: 30;
+	display: block;
+	margin-left: 39%;
+	position: absolute;
 }
 
-.animation{
-    z-index: 10;
-    position: absolute;
-    background-color: black;
+.animation {
+	z-index: 10;
+	position: absolute;
+	background-color: black;
 }
 
-.Btn{
-margin-top: 1%;
-margin-left: 95%;
-border: none;
-background-color: transparent;
-position: relative;
-z-index: 15;
+.Btn {
+	margin-top: 1%;
+	margin-left: 95%;
+	border: none;
+	background-color: transparent;
+	position: relative;
+	z-index: 15;
 }
 
-.Btn:hover{
-    opacity: 0.6;
+.Btn:hover {
+	opacity: 0.6;
 }
 
-.modal-button{
-    z-index: 15;
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    margin-top: 30%;
-    //margin-left: 30%;
+.modal-button {
+	z-index: 15;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	margin-top: 30%;
+	//margin-left: 30%;
 }
 
 .modal-button button {
-    margin: 1%;
-    background-color: transparent;
-    border: 1px solid white;
-    color: white;
+	margin: 1%;
+	background-color: transparent;
+	border: 1px solid white;
+	color: white;
 }
 
-.customise{
-    z-index: 15;
-    background-color: transparent;
-    border:1px solid white;
-    position: absolute;
-    color: white;
-    width: 10%;
-    font-size: smaller;
-    padding: 3px;
-    margin-left: -58%;
-    margin-top: 35%;
+.customise {
+	z-index: 15;
+	background-color: transparent;
+	border: 1px solid white;
+	position: absolute;
+	color: white;
+	width: 10%;
+	font-size: smaller;
+	padding: 3px;
+	margin-left: -58%;
+	margin-top: 35%;
 }
 
-.recommended{
-    z-index: 15;
-    background-color: transparent;
-    border:1px solid white;
-    position: absolute;
-    color: white;
-    width: 10%;
-    font-size: smaller;
-    padding: 3px;
-    margin-left: -46%;
-    margin-top: 35%;
+.recommended {
+	z-index: 15;
+	background-color: transparent;
+	border: 1px solid white;
+	position: absolute;
+	color: white;
+	width: 10%;
+	font-size: smaller;
+	padding: 3px;
+	margin-left: -46%;
+	margin-top: 35%;
 }
 
-strong{
-    padding: 6%;
+strong {
+	padding: 6%;
+}
 
-} 
-
-.btn{
-    margin-bottom: 10%;
+.btn {
+	margin-bottom: 10%;
 }

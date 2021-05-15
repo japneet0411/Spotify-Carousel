@@ -1,51 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 #Home {
-
-
-  height: 100vh;
-  width: 100%;
-  background-color: #A8F368;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+	width: 100%;
+	background-color: #a8f368;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	margin: 0;
+	font-family: 'Montserrat', sans-serif;
 }
 .background-Img {
-  opacity: 0.15;
-  z-index: -5;
-  height: 100vh;
-  width: 100%;
+	opacity: 0.15;
+	z-index: -5;
+	height: 100vh;
+	width: 100%;
 }
 .Heading {
-  /* padding: 10px; */
-  font-size: 4.5rem;
-  margin-top: -40%;
-  margin-left: 5%;
-  font-weight:bolder;
-  color: black;
-  position: relative;
+	/* padding: 10px; */
+	font-size: 4.5rem;
+	margin-top: -40%;
+	margin-left: 5%;
+	font-weight: bolder;
+	color: black;
+	position: relative;
 }
 
 .description {
-  z-index: 10;
-  margin-top: 28%;
-  font-weight: normal;
-  width: 70%;
-  margin-left: 15%;
-  color: black;
-  position: relative;
+	z-index: 10;
+	margin-top: 28%;
+	font-weight: normal;
+	width: 70%;
+	margin-left: 15%;
+	color: black;
+	position: relative;
 }
 .button {
-  color: #A8F368;
-  background-color: black;
-  margin-top: -20%;
-  font-weight: bolder;
-  margin-right: 50px;
-  width: 150px;
-  z-index: 10;
-  position: relative;
-  border-radius: 25px !important;
-  padding: 10px;
+	color: #a8f368;
+	background-color: black;
+	margin-top: -20%;
+	font-weight: bolder;
+	margin-right: 50px;
+	width: 150px;
+	z-index: 10;
+	position: relative;
+	border-radius: 25px !important;
+	padding: 10px;
 }
 
+.regular {
+	color: white;
+	text-decoration: none;
+}

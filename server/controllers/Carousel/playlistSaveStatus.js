@@ -1,13 +1,15 @@
 import { usersModel } from './../../models/users';
 
-export const playlistSaveStatus = async(req, res) => {
-    const query = await usersModel.findOne({
-        username: req.params.username
-    }).exec();
-    const savedPlaylists = query.savedPlaylists;
-    console.log(savedPlaylists);
-    if(savedPlaylists.indexOf(req.body.playlistName)===-1){
-        /*await usersModel
+export const playlistSaveStatus = async (req, res) => {
+	const query = await usersModel
+		.findOne({
+			username: req.params.username,
+		})
+		.exec();
+	const savedPlaylists = query.savedPlaylists;
+	console.log(savedPlaylists);
+	if (savedPlaylists.indexOf(req.body.playlistName) === -1) {
+		/*await usersModel
         .findOneAndUpdate({
          username: req.params.username
      }, {
@@ -15,13 +17,12 @@ export const playlistSaveStatus = async(req, res) => {
              savedPlaylists: req.body.playlistName
          }
      }).exec();*/
-     res.status(200).send({
-        //message: "Saved Playlist",
-        saved: false
-    });
-    }
-    else{
-        /*const query = await usersModel.findOne({
+		res.status(200).send({
+			//message: "Saved Playlist",
+			saved: false,
+		});
+	} else {
+		/*const query = await usersModel.findOne({
             username: req.params.username
         }).exec();
         var playlists = query.savedPlaylists;
@@ -31,9 +32,9 @@ export const playlistSaveStatus = async(req, res) => {
         }, {
             savedPlaylists: playlists
         }).exec();*/
-        res.status(200).send({
-            message: "Removed saved playlist",
-            saved: true
-        });
-    }
-}
+		res.status(200).send({
+			message: 'Removed saved playlist',
+			saved: true,
+		});
+	}
+};

@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 .cards {
-    text-align: left;
+	text-align: left;
 }
 
 .card-img {
-    height: 20rem;
+	height: 20rem;
 }
 
 .card-text-style {
-    font-family: 'Montserrat', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .icons {
-    width: 100%;
-    display: block;
-    text-align: right;
+	width: 100%;
+	display: block;
+	text-align: right;
 }

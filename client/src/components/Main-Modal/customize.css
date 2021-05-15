@@ -1,16 +1,16 @@
-.custom{
-    margin-top: 1%;
-    margin-left: 3%;
-    height:95vh;
-    width:95%;
-    background-color: white;
+.custom {
+	margin-top: 1%;
+	margin-left: 3%;
+	height: 95vh;
+	width: 95%;
+	background-color: white;
 }
 
-.preview{
-    margin-top: -20% !important;
-    margin-left: 50%;
-    height: 400px !important;
-    width: 500px !important;
+.preview {
+	margin-top: -20% !important;
+	margin-left: 50%;
+	height: 400px !important;
+	width: 500px !important;
 }
 
 /*.head{
