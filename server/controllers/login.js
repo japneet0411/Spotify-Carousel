@@ -1,4 +1,5 @@
 const empty = require('is-empty');
+const axios = require('axios');
 import { userAuthModel } from './../models/userAuth';
 
 export const login = async (req, res, next) => {
@@ -8,15 +9,19 @@ export const login = async (req, res, next) => {
 			message: 'Please fill in all the fields',
 		});
 	}
-	console.log('This is it', req.user);
-	try {
-		//If user is authenticated: Store user's email in session cookie
-		var data = req.session;
-		data.username = req.user.username;
-		res.status(200).send({
-			message: 'Success',
+	await axios
+		.post('http://localhost:5000/auth', {
+			username: req.body.username,
+			password: req.body.password,
+		})
+		.then((response) => {
+			if (response.data.message) {
+				res.status(200).send({
+					message: 'Success',
+				});
+			}
+			res.status(200).send({
+				message: 'Unauthorized User',
+			});
 		});
-	} catch (e) {
-		console.log(e);
-	}
 };

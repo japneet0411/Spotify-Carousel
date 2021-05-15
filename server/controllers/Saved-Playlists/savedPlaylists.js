@@ -21,5 +21,7 @@ export const savedPlaylists = async (req, res) => {
 			id: playlist.playlistName,
 		});
 	}
-	res.status(200).send(savedPlaylists);
+	res.status(200).send({
+		items: savedPlaylists,
+	});
 };

@@ -14,7 +14,6 @@ export default class CardLayout extends Component {
 		this.state = {
 			details: [],
 			loaded: false,
-			message: 'My my such empty!',
 		};
 	}
 	componentDidMount() {
@@ -23,8 +22,7 @@ export default class CardLayout extends Component {
 			.then((response) => {
 				//console.log(response.data);
 				this.setState({
-					details: response.data.tracks,
-					message: response.data.message,
+					details: response.data.items,
 				});
 			})
 			.catch((err) => {
@@ -77,6 +75,7 @@ export default class CardLayout extends Component {
 						<Lottie options={defaultOptions} height={400} width={400} />
 					</div>
 				)}
+				{console.log(items.length)}
 				{items.length > 0 ? (
 					<div style={this.state.loaded ? {} : { display: 'none' }}>
 						<div className='heading'>{this.props.heading}</div>
@@ -91,7 +90,7 @@ export default class CardLayout extends Component {
 						<div className='subheading'>{this.props.subheading}</div>
 						<br />
 						<br />
-						{this.state.message}
+						My my such empty!
 					</div>
 				)}
 			</div>

@@ -23,5 +23,7 @@ export const wallOfMusic = async (req, res) => {
 		});
 	}
 	console.log(trackDetails);
-	res.status(200).send(trackDetails);
+	res.status(200).send({
+		items: trackDetails,
+	});
 };

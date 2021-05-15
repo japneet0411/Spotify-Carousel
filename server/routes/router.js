@@ -29,6 +29,7 @@ import { addTrackToPlaylist } from './../controllers/userSpotifyAuth';
 import { explicitStatus } from './../controllers/explicit';
 import { login } from './../controllers/login';
 import { signUp } from './../controllers/signUp';
+import { auth } from './../controllers/auth';
 
 router.route('/scraper').post(fetchData);
 router.route('/setImages').get(setImages);
@@ -55,5 +56,6 @@ router
 router.route('/:username/addToMyLibrary').get(addToLibrary);
 router.route('/:username/addToUserPlaylist').post(addTrackToPlaylist);
 router.route('/:username/explicit').post(explicitStatus);
-router.route('/login').post(passport.authenticate('local'), login);
+router.route('/login').post(login);
 router.route('/signUp').post(signUp);
+router.route('/auth').post(passport.authenticate('local'), auth);
