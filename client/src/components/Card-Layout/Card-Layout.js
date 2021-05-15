@@ -14,15 +14,17 @@ export default class CardLayout extends Component {
 		this.state = {
 			details: [],
 			loaded: false,
+			message: 'My my such empty!',
 		};
 	}
 	componentDidMount() {
 		axios
 			.get(this.props.serverURL)
 			.then((response) => {
-				console.log(response.data);
+				//console.log(response.data);
 				this.setState({
-					details: response.data,
+					details: response.data.tracks,
+					message: response.data.message,
 				});
 			})
 			.catch((err) => {
@@ -37,19 +39,21 @@ export default class CardLayout extends Component {
 
 	render() {
 		var items = [];
-		for (let item of this.state.details) {
-			items.push(
-				<Card
-					key={item}
-					src={item.image}
-					main={item.main}
-					subtext={item.subtext}
-					id={item.id}
-					type={this.props.type}
-					delete={this.props.delete}
-					loginWithSpotify={this.props.loginWithSpotify}
-				/>
-			);
+		if (this.state.details) {
+			for (let item of this.state.details) {
+				items.push(
+					<Card
+						key={item}
+						src={item.image}
+						main={item.main}
+						subtext={item.subtext}
+						id={item.id}
+						type={this.props.type}
+						delete={this.props.delete}
+						loginWithSpotify={this.props.loginWithSpotify}
+					/>
+				);
+			}
 		}
 		const defaultOptions = {
 			loop: true,
@@ -87,7 +91,7 @@ export default class CardLayout extends Component {
 						<div className='subheading'>{this.props.subheading}</div>
 						<br />
 						<br />
-						My my such empty!
+						{this.state.message}
 					</div>
 				)}
 			</div>

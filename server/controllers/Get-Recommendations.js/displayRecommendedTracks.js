@@ -28,5 +28,7 @@ export const displayRecommendedTracks = async (req, res) => {
 			message: 'Success',
 		});
 	}
-	res.status(200).send(recommendedTracks);
+	res.status(200).send({
+		tracks: recommendedTracks,
+	});
 };

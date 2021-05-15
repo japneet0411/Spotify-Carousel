@@ -15,7 +15,7 @@ function Bar(props) {
 		setExpanded(true);
 		if (checked === true) handleChange(false);
 		else handleChange(true);
-		axios.post('http://localhost:5000/guest/explicit', {
+		axios.post('http://localhost:5000/' + username + '/explicit', {
 			explicit: checked,
 		});
 		window.location.reload();

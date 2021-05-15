@@ -32,12 +32,18 @@ class PlayASong extends Component {
 			embed_url: '',
 			saved: false,
 			loaded: false,
+			username: sessionStorage.getItem('user'),
 		};
 	}
 
 	componentDidMount() {
 		axios
-			.get('http://localhost:5000/guest/modal/' + this.props.index)
+			.get(
+				'http://localhost:5000/' +
+					this.state.username +
+					'/modal/' +
+					this.props.index
+			)
 			.then((response) => {
 				//console.log(response);
 				this.setState({
@@ -78,24 +84,30 @@ class PlayASong extends Component {
 	trackSaveStatus = () => {
 		console.log('In track save status');
 		if (this.state.saved) {
-			axios.post('http://localhost:5000/guest/removeSavedTrack', {
-				trackId: this.state.embed_url.replace(
-					'https://open.spotify.com/embed/track/',
-					''
-				),
-			});
+			axios.post(
+				'http://localhost:5000/' + this.state.username + '/removeSavedTrack',
+				{
+					trackId: this.state.embed_url.replace(
+						'https://open.spotify.com/embed/track/',
+						''
+					),
+				}
+			);
 			this.setState({
 				saved: false,
 				text: 'Save Track',
 				icon: faPlusCircle,
 			});
 		} else {
-			axios.post('http://localhost:5000/guest/saveTrack', {
-				trackId: this.state.embed_url.replace(
-					'https://open.spotify.com/embed/track/',
-					''
-				),
-			});
+			axios.post(
+				'http://localhost:5000/' + this.state.username + '/saveTrack',
+				{
+					trackId: this.state.embed_url.replace(
+						'https://open.spotify.com/embed/track/',
+						''
+					),
+				}
+			);
 			this.setState({
 				saved: true,
 				text: 'Saved',
