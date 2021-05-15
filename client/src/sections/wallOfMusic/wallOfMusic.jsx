@@ -12,7 +12,7 @@ function WallOfMusic() {
 				serverURL={'http://localhost:5000/' + username + '/wallOfMusic'}
 				heading={'Wall Of Music'}
 				subheading={'Lorem Ipsum Dolor Sit Amet'}
-				type={'track'}
+				type={'trackModal'}
 				delete={true}
 				loginWithSpotify={true}
 			/>

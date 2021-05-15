@@ -3,9 +3,11 @@ import { usersModel } from './../../models/users';
 import randomItem from 'random-item';
 
 export const modal = async (req, res) => {
+	console.log(req.body.playlist);
 	const playlist = await playlistsModel
-		.find({ playlistName: req.params.playlist })
+		.find({ playlistName: req.body.playlist })
 		.exec();
+	console.log(playlist);
 	const listOfTracks = playlist[0].listOfTracks;
 	const query = await usersModel.findOne({ username: req.params.username });
 	const explicit = query.explicit;

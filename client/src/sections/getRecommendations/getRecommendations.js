@@ -12,7 +12,7 @@ function GetRecommendations() {
 				serverURL={'http://localhost:5000/' + username + '/getRecommendations'}
 				heading={'Recommended For You'}
 				subheading={'Lorem Ipsum Dolor Sit Amet'}
-				type={'track'}
+				type={'trackModal'}
 				delete={false}
 				loginWithSpotify={true}
 			/>

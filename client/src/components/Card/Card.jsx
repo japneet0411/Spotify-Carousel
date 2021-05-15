@@ -30,7 +30,7 @@ function Cards(props) {
 	const handleClose = () => setShowModal(false);
 
 	const deleteFunction = () => {
-		if (props.type === 'track' && props.delete) {
+		if (props.type === 'trackModal' && props.delete) {
 			axios.post('http://localhost:5000/' + username + '/removeSavedTrack', {
 				trackId: props.id,
 			});
@@ -39,7 +39,7 @@ function Cards(props) {
 					window.location.reload();
 				}
 			});
-		} else if (props.type === 'playlist' && props.delete) {
+		} else if (props.type === 'carouselModal' && props.delete) {
 			axios.post('http://localhost:5000/' + username + '/removeSavedPlaylist', {
 				playlist: props.id,
 			});
@@ -136,7 +136,7 @@ function Cards(props) {
 	}
 	return (
 		<div>
-			{showModal && props.type === 'track' ? (
+			{showModal && props.type === 'trackModal' ? (
 				<TrackModal
 					isOpen={showModal}
 					onRequestClose={handleClose}
@@ -144,7 +144,7 @@ function Cards(props) {
 					embedUrl={'https://open.spotify.com/embed/track/' + embedUrl}
 				/>
 			) : null}
-			{showModal && props.type === 'playlist' ? (
+			{showModal && props.type === 'carouselModal' ? (
 				<PlayASong
 					isOpen={showModal}
 					onRequestClose={handleClose}

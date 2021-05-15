@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faTimes } from '@fortawesome/free-solid-svg-icons';
-//import { faPlusCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+	faPlusCircle,
+	faCheckCircle,
+	faMusic,
+} from '@fortawesome/free-solid-svg-icons';
 import Customize from './../Main-Modal/customize';
 import Canvas from './../Canvas/Canvas';
 import Modal from 'react-modal';
 import './Track-Modal.scss';
 import './Track-Modal.css';
-//import axios from 'axios';
-//import Swal from 'sweetalert2';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import Lottie from 'react-lottie';
 import animationData from './../../lotties/carousel-loading.json';
 //import Switch from 'react-switch';
@@ -23,16 +27,35 @@ class TrackModal extends Component {
 			color2: '#ffffff',
 			color3: '#ffffff',
 			color4: '#000000',
-			embed_url: '',
+			embed_url: this.props.embed_url,
 			loaded: false,
+			icon: faPlusCircle,
+			text: 'Save Track',
+			saved: false,
 			username: sessionStorage.getItem('user'),
 		};
 	}
 
 	componentDidMount() {
-		this.setState({
-			embed_url: this.props.embedUrl,
-		});
+		axios
+			.post(
+				'http://localhost:5000/' + this.state.username + '/getTrackStatus',
+				{
+					trackId: this.state.embed_url.replace(
+						'https://open.spotify.com/embed/track/',
+						''
+					),
+				}
+			)
+			.then((response) => {
+				//console.log(response);
+				this.setState({
+					saved: response.data.saved,
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 	setColor1 = (color1) => {
@@ -60,14 +83,52 @@ class TrackModal extends Component {
 		});
 	};
 
-	/*getSimilarTracks = () => {
+	trackSaveStatus = () => {
+		console.log('In track save status');
+		if (this.state.saved) {
+			axios.post(
+				'http://localhost:5000/' + this.state.username + '/removeSavedTrack',
+				{
+					trackId: this.state.embed_url.replace(
+						'https://open.spotify.com/embed/track/',
+						''
+					),
+				}
+			);
+			this.setState({
+				saved: false,
+				text: 'Save Track',
+				icon: faPlusCircle,
+			});
+		} else {
+			axios.post(
+				'http://localhost:5000/' + this.state.username + '/saveTrack',
+				{
+					trackId: this.state.embed_url.replace(
+						'https://open.spotify.com/embed/track/',
+						''
+					),
+				}
+			);
+			this.setState({
+				saved: true,
+				text: 'Saved',
+				icon: faCheckCircle,
+			});
+		}
+	};
+
+	getSimilarTracks = () => {
 		axios
-			.post('http://localhost:5000/getSimilarTracks', {
-				trackId: this.state.embed_url.replace(
-					'https://open.spotify.com/embed/track/',
-					''
-				),
-			})
+			.post(
+				'http://localhost:5000/' + this.state.username + '/getSimilarTracks',
+				{
+					trackId: this.state.embed_url.replace(
+						'https://open.spotify.com/embed/track/',
+						''
+					),
+				}
+			)
 			.then((response) => {
 				console.log(response.data);
 				var html = response.data.name + '<br />' + response.data.artist;
@@ -76,25 +137,30 @@ class TrackModal extends Component {
 					imageHeight: 200,
 					imageWidth: 200,
 					html: html,
-					confirmButtonText: 'Check Out Later',
+					confirmButtonText: 'Play Track',
+					showCloseButton: true,
 				})
 					.then((result) => {
 						if (result.isConfirmed) {
-							axios
-								.post(
-									'http://localhost:5000/' +
-										this.state.username +
-										'/saveForLater',
-									{
-										trackId: response.data.trackId,
-									}
-								)
-								.then((response) => {
-									Swal.fire(response.data.message);
-								})
-								.catch((err) => {
-									console.log(err);
+							if (response.data.saved) {
+								this.setState({
+									embed_url:
+										'https://open.spotify.com/embed/track/' +
+										response.data.trackId,
+									saved: true,
+									text: 'Saved',
+									icon: faCheckCircle,
 								});
+							} else {
+								this.setState({
+									embed_url:
+										'https://open.spotify.com/embed/track/' +
+										response.data.trackId,
+									saved: false,
+									text: 'Save Track',
+									icon: faPlusCircle,
+								});
+							}
 						}
 					})
 					.catch((err) => {
@@ -104,7 +170,7 @@ class TrackModal extends Component {
 			.catch((err) => {
 				console.log(err);
 			});
-	};*/
+	};
 
 	render() {
 		const customStyles = {
@@ -173,6 +239,18 @@ class TrackModal extends Component {
 						onLoad={() => this.setState({ loaded: true })}></iframe>
 					<div className='modal-button'>
 						<button
+							onClick={this.trackSaveStatus}
+							style={this.state.loaded ? {} : { display: 'none' }}>
+							{console.log(this.state.saved, this.state.text, this.state.icon)}
+							<FontAwesomeIcon
+								icon={this.state.icon}
+								size='1x'
+								style={{ color: 'white' }}
+							/>
+							<br />
+							{this.state.text}
+						</button>
+						<button
 							style={this.state.loaded ? {} : { display: 'none' }}
 							onClick={this.onClickEvent}>
 							<FontAwesomeIcon
@@ -180,10 +258,10 @@ class TrackModal extends Component {
 								size='1x'
 								style={{ color: 'white' }}
 							/>
-							<br></br>
+							<br />
 							Customize
 						</button>
-						{/*<button
+						<button
 							onClick={this.getSimilarTracks}
 							style={this.state.loaded ? {} : { display: 'none' }}>
 							<FontAwesomeIcon
@@ -191,9 +269,9 @@ class TrackModal extends Component {
 								size='1x'
 								style={{ color: 'white' }}
 							/>
-							<br></br>
+							<br />
 							Similar Tracks
-            </button>*/}
+						</button>
 					</div>
 				</Modal>
 				<Customize

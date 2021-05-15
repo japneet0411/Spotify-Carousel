@@ -12,7 +12,7 @@ function SavedPlaylists() {
 				serverURL={'http://localhost:5000/' + username + '/listSavedPlaylists'}
 				heading={'Your Saved Playlists'}
 				subheading={'Lorem Ipsum Dolor Sit Amet'}
-				type={'playlist'}
+				type={'carouselModal'}
 				delete={true}
 				loginWithSpotify={false}
 			/>

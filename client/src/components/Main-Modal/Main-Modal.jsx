@@ -38,12 +38,9 @@ class PlayASong extends Component {
 
 	componentDidMount() {
 		axios
-			.get(
-				'http://localhost:5000/' +
-					this.state.username +
-					'/modal/' +
-					this.props.index
-			)
+			.post('http://localhost:5000/' + this.state.username + '/modal', {
+				playlist: this.props.index,
+			})
 			.then((response) => {
 				//console.log(response);
 				this.setState({

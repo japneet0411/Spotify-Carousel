@@ -45,16 +45,29 @@
 	color: white;
 }
 
+.add {
+	z-index: 15;
+	background-color: transparent;
+	border: 1px solid white;
+	margin-left: -63%;
+	margin-top: 35%;
+	position: absolute;
+	color: white;
+	width: 50px;
+	//padding: 3px;
+	font-size: smaller;
+}
+
 .customise {
 	z-index: 15;
 	background-color: transparent;
 	border: 1px solid white;
 	position: absolute;
 	color: white;
-	width: 10%;
+	width: 50px;
 	font-size: smaller;
-	padding: 3px;
-	margin-left: -58%;
+	//padding: 3px;
+	//margin-left: -30%;
 	margin-top: 35%;
 }
 
@@ -64,10 +77,10 @@
 	border: 1px solid white;
 	position: absolute;
 	color: white;
-	width: 10%;
+	width: 50px;
 	font-size: smaller;
-	padding: 3px;
-	margin-left: -46%;
+	//padding: 3px;
+	//margin-left: -41%;
 	margin-top: 35%;
 }
 

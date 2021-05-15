@@ -8,6 +8,7 @@ export const wallOfMusic = async (req, res) => {
 	});
 	console.log(query);
 	const tracks = query.savedTracks;
+	console.log(tracks);
 	const trackDetails = [];
 	for (var i = 0; i < tracks.length; i++) {
 		var track = await tracksModel
