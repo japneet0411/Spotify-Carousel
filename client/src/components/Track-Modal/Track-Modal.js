@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPalette, faTimes, faMusic } from '@fortawesome/free-solid-svg-icons';
+import { faPalette, faTimes } from '@fortawesome/free-solid-svg-icons';
 //import { faPlusCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import Customize from './../Main-Modal/customize';
 import Canvas from './../Canvas/Canvas';
 import Modal from 'react-modal';
 import './Track-Modal.scss';
 import './Track-Modal.css';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+//import axios from 'axios';
+//import Swal from 'sweetalert2';
 import Lottie from 'react-lottie';
 import animationData from './../../lotties/carousel-loading.json';
 //import Switch from 'react-switch';
@@ -60,7 +60,7 @@ class TrackModal extends Component {
 		});
 	};
 
-	getSimilarTracks = () => {
+	/*getSimilarTracks = () => {
 		axios
 			.post('http://localhost:5000/getSimilarTracks', {
 				trackId: this.state.embed_url.replace(
@@ -104,7 +104,7 @@ class TrackModal extends Component {
 			.catch((err) => {
 				console.log(err);
 			});
-	};
+	};*/
 
 	render() {
 		const customStyles = {
@@ -183,7 +183,7 @@ class TrackModal extends Component {
 							<br></br>
 							Customize
 						</button>
-						<button
+						{/*<button
 							onClick={this.getSimilarTracks}
 							style={this.state.loaded ? {} : { display: 'none' }}>
 							<FontAwesomeIcon
@@ -193,7 +193,7 @@ class TrackModal extends Component {
 							/>
 							<br></br>
 							Similar Tracks
-						</button>
+            </button>*/}
 					</div>
 				</Modal>
 				<Customize

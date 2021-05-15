@@ -8,11 +8,7 @@ export const removeFromSavedPlaylists = async (req, res) => {
 		.exec();
 	var playlists = query.savedPlaylists;
 	const index = playlists.indexOf(req.body.playlist);
-	if (index === 0) {
-		playlists.shift();
-	} else {
-		playlists = playlists.splice(playlists.indexOf(req.body.playlist), 1);
-	}
+	playlists.splice(index, 1);
 	await usersModel
 		.findOneAndUpdate(
 			{

@@ -7,11 +7,7 @@ export const removeSavedTrack = async (req, res) => {
 	});
 	var tracks = query.savedTracks;
 	const index = tracks.indexOf(req.body.trackId);
-	if (index === 0) {
-		tracks.shift();
-	} else {
-		tracks = tracks.splice(index - 1, 1);
-	}
+	tracks.splice(index, 1);
 	await usersModel
 		.findOneAndUpdate(
 			{
