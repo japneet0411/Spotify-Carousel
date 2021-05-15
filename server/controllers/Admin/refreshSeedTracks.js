@@ -22,5 +22,4 @@ export const refreshSeedTracks = async (req, res) => {
 			.exec();
 	}
 	res.status(200).send('Set new list of seed tracks');
-	//res.redirect('/admin/getRecommendations);
 };

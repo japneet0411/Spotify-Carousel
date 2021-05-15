@@ -118,12 +118,15 @@ class PlayASong extends Component {
 
 	getSimilarTracks = () => {
 		axios
-			.post('http://localhost:5000/getSimilarTracks', {
-				trackId: this.state.embed_url.replace(
-					'https://open.spotify.com/embed/track/',
-					''
-				),
-			})
+			.post(
+				'http://localhost:5000/' + this.state.username + '/getSimilarTracks',
+				{
+					trackId: this.state.embed_url.replace(
+						'https://open.spotify.com/embed/track/',
+						''
+					),
+				}
+			)
 			.then((response) => {
 				console.log(response.data);
 				var html = response.data.name + '<br />' + response.data.artist;
@@ -137,11 +140,25 @@ class PlayASong extends Component {
 				})
 					.then((result) => {
 						if (result.isConfirmed) {
-							this.setState({
-								embed_url:
-									'https://open.spotify.com/embed/track/' +
-									response.data.trackId,
-							});
+							if (response.data.saved) {
+								this.setState({
+									embed_url:
+										'https://open.spotify.com/embed/track/' +
+										response.data.trackId,
+									saved: true,
+									text: 'Saved',
+									icon: faCheckCircle,
+								});
+							} else {
+								this.setState({
+									embed_url:
+										'https://open.spotify.com/embed/track/' +
+										response.data.trackId,
+									saved: false,
+									text: 'Save Track',
+									icon: faPlusCircle,
+								});
+							}
 						}
 					})
 					.catch((err) => {

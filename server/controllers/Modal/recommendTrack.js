@@ -15,11 +15,13 @@ export const recommendTrack = async (req, res) => {
 			});
 	}
 	const track = req.body.trackId;
+	console.log(req.params.username);
 	const query = await usersModel
 		.findOne({
 			username: req.params.username,
 		})
 		.exec();
+	console.log(query);
 	spotifyApi
 		.getAudioFeaturesForTrack(track)
 		.then((data) => {
@@ -71,13 +73,25 @@ export const recommendTrack = async (req, res) => {
 					var track = randomItem(data.body.tracks);
 
 					//console.log(track);
-					var recommendedTrack = {
-						name: track.name,
-						artist: track.artists[0].name,
-						trackId: track.id,
-						album: track.album.images[0].url,
-						message: 'Success',
-					};
+					if (query.savedTracks.indexOf(track) === -1) {
+						var recommendedTrack = {
+							name: track.name,
+							artist: track.artists[0].name,
+							trackId: track.id,
+							album: track.album.images[0].url,
+							message: 'Success',
+							saved: false,
+						};
+					} else {
+						var recommendedTrack = {
+							name: track.name,
+							artist: track.artists[0].name,
+							trackId: track.id,
+							album: track.album.images[0].url,
+							message: 'Success',
+							saved: true,
+						};
+					}
 					res.status(200).send(recommendedTrack);
 				})
 				.catch((err) => {

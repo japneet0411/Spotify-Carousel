@@ -46,7 +46,7 @@ router.route('/:username/removeSavedPlaylist').post(removeFromSavedPlaylists);
 router.route('/:username/setPlaylistSaveStatus').post(setPlaylistSaveStatus);
 router.route('/:username/listSavedPlaylists').get(savedPlaylists);
 router.route('/:username/getRecommendations').get(displayRecommendedTracks);
-router.route('/getSimilarTracks').post(recommendTrack);
+router.route('/:username/getSimilarTracks').post(recommendTrack);
 router.route('/:username/saveForLater').post(savedForLater);
 router.route('/:username/authenticateWithSpotify').get(userSpotifyAuth);
 router.route('/callback').get(spotifyAuthUser);
