@@ -1,7 +1,7 @@
 import React from 'react';
 import './landingPage.scss';
 import './landingPage.css';
-import Background from './../../Images/background.jpg';
+import Background from './../../images/background.jpg';
 import Navbar from './../../components/Navbar/NavbarHome';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';

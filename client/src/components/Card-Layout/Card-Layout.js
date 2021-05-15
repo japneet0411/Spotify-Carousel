@@ -73,13 +73,21 @@ export default class CardLayout extends Component {
 						<Lottie options={defaultOptions} height={400} width={400} />
 					</div>
 				)}
-				{items.length > 0 && (
+				{items.length > 0 ? (
 					<div style={this.state.loaded ? {} : { display: 'none' }}>
 						<div className='heading'>{this.props.heading}</div>
 						<div className='subheading'>{this.props.subheading}</div>
 						<br />
 						<br />
 						<CardColumns>{items}</CardColumns>
+					</div>
+				) : (
+					<div style={this.state.loaded ? {} : { display: 'none' }}>
+						<div className='heading'>{this.props.heading}</div>
+						<div className='subheading'>{this.props.subheading}</div>
+						<br />
+						<br />
+						My my such empty!
 					</div>
 				)}
 			</div>

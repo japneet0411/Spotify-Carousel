@@ -9,6 +9,7 @@ import axios from 'axios';
 function Bar(props) {
 	const [checked, handleChange] = useState(true);
 	const [expanded, setExpanded] = useState(false);
+	const username = sessionStorage.getItem('user');
 
 	function Change() {
 		setExpanded(true);
@@ -38,22 +39,24 @@ function Bar(props) {
 					<hr class='Line'></hr>
 					<Nav className='px-1' style={{ textAlign: 'right' }}>
 						<Nav.Link href='#' onClick={() => setExpanded(false)}>
-							<Link className='regular' to='/'>
+							<Link className='regular' to={'/' + username + '/carousel'}>
 								Carousel
 							</Link>
 						</Nav.Link>
 						<Nav.Link href='#' onClick={() => setExpanded(false)}>
-							<Link className='regular' to='/wallOfMusic'>
+							<Link className='regular' to={'/' + username + '/wallOfMusic'}>
 								Wall of Music
 							</Link>
 						</Nav.Link>
 						<Nav.Link href='#' onClick={() => setExpanded(false)}>
-							<Link className='regular' to='/getRecommendations'>
+							<Link
+								className='regular'
+								to={'/' + username + '/getRecommendations'}>
 								Get Recommendations
 							</Link>
 						</Nav.Link>
 						<Nav.Link href='#' onClick={() => setExpanded(false)}>
-							<Link className='regular' to='/savedPlaylists'>
+							<Link className='regular' to={'/' + username + '/savedPlaylists'}>
 								Saved Playlists
 							</Link>
 						</Nav.Link>

@@ -6,7 +6,6 @@ import { Form } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 function Login() {
 	const [username, setUsername] = useState('');

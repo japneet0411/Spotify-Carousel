@@ -10,13 +10,14 @@ import TrackModal from './../Track-Modal/Track-Modal';
 import PlayASong from './../Main-Modal/Main-Modal';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Modal, Button, ListGroup } from 'react-bootstrap';
 
 function Cards(props) {
 	const [showModal, setShowModal] = useState(false);
 	const [embedUrl, setEmbedUrl] = useState('');
 	const [details, setDetails] = useState([]);
 	const [showSpotifyModal, setShowSpotifyModal] = useState(false);
+	const username = sessionStorage.getItem('user');
 
 	const handleCloseSpotifyModal = () => setShowSpotifyModal(false);
 	const handleShowSpotifyModal = () => setShowSpotifyModal(true);
@@ -30,7 +31,7 @@ function Cards(props) {
 
 	const deleteFunction = () => {
 		if (props.type === 'track' && props.delete) {
-			axios.post('http://localhost:5000/guest/removeSavedTrack', {
+			axios.post('http://localhost:5000/' + username + '/removeSavedTrack', {
 				trackId: props.id,
 			});
 			Swal.fire('Deleted track').then((result) => {
@@ -39,7 +40,7 @@ function Cards(props) {
 				}
 			});
 		} else if (props.type === 'playlist' && props.delete) {
-			axios.post('http://localhost:5000/guest/removeSavedPlaylist', {
+			axios.post('http://localhost:5000/' + username + '/removeSavedPlaylist', {
 				playlist: props.id,
 			});
 			Swal.fire('Deleted playlist').then((result) => {
@@ -52,7 +53,7 @@ function Cards(props) {
 
 	const loginWithSpotify = () => {
 		axios
-			.get('http://localhost:5000/guest/isAuthenticatedWithSpotify')
+			.get('http://localhost:5000/' + username + '/isAuthenticatedWithSpotify')
 			.then((response) => {
 				if (response.data.message === 'Success') {
 					Swal.fire('Your have already connected to your spotify account');
@@ -65,7 +66,11 @@ function Cards(props) {
 					}).then((result) => {
 						if (result.isConfirmed) {
 							axios
-								.get('http://localhost:5000/guest/authenticateWithSpotify')
+								.get(
+									'http://localhost:5000/' +
+										username +
+										'/authenticateWithSpotify'
+								)
 								.then((response) => {
 									window.open(response.data.url);
 								})
@@ -80,12 +85,12 @@ function Cards(props) {
 
 	const addToSpotify = () => {
 		axios
-			.get('http://localhost:5000/guest/isAuthenticatedWithSpotify')
+			.get('http://localhost:5000/' + username + '/isAuthenticatedWithSpotify')
 			.then((response) => {
 				if (response.data.message === 'Success') {
 					handleShowSpotifyModal();
 					axios
-						.get('http://localhost:5000/guest/addToMyLibrary')
+						.get('http://localhost:5000/' + username + '/addToMyLibrary')
 						.then((response) => {
 							setDetails(response.data.details);
 						})
@@ -103,7 +108,7 @@ function Cards(props) {
 
 	const addToPlaylist = (id) => {
 		axios
-			.post('http://localhost:5000/guest/addToUserPlaylist', {
+			.post('http://localhost:5000/' + username + '/addToUserPlaylist', {
 				trackId: props.id,
 				playlist: id,
 			})

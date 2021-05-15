@@ -15,7 +15,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Lottie from 'react-lottie';
 import animationData from './../../lotties/carousel-loading.json';
-import { Button } from 'react-bootstrap';
 //import Switch from 'react-switch';
 
 class PlayASong extends Component {
