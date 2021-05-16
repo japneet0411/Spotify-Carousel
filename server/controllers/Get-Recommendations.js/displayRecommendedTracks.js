@@ -20,7 +20,7 @@ export const displayRecommendedTracks = async (req, res) => {
 					trackId: tracks[i],
 				})
 				.exec();
-			if (!explicitStatus && track.explicit === true)
+			if (!explicitStatus || (explicitStatus && track.explicit === false))
 				recommendedTracks.push({
 					main: track.name,
 					subtext: track.artist,

@@ -16,7 +16,7 @@ export const wallOfMusic = async (req, res) => {
 				trackId: tracks[i],
 			})
 			.exec();
-		if (!query.explicit && track.explicit === true) {
+		if (!query.explicit || (query.explicit && track.explicit === false)) {
 			trackDetails.push({
 				main: track.name,
 				subtext: track.artist,

@@ -71,7 +71,10 @@ export const recommendTrack = async (req, res) => {
 				.then((data) => {
 					var count = 0;
 					var track = randomItem(data.body.tracks);
-					while (!query.explicit && track.explicit === true && count != 5) {
+					while (
+						!query.explicit ||
+						(query.explicit && track.explicit === false && count != 5)
+					) {
 						track = randomItem(data.body.tracks);
 					}
 					//console.log(track);

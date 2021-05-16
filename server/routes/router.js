@@ -19,7 +19,6 @@ import { removeSavedTrack } from './../controllers/Wall-Of-Music/removeSavedTrac
 import { savedPlaylists } from './../controllers/Saved-Playlists/savedPlaylists';
 import { displayRecommendedTracks } from './../controllers/Get-Recommendations.js/displayRecommendedTracks';
 import { recommendTrack } from './../controllers/Modal/recommendTrack';
-import { savedForLater } from './../controllers/Saved-For-Later/savedForLater';
 import { userSpotifyAuth } from './../controllers/userSpotifyAuth';
 import { spotifyAuthUser } from './../controllers/userSpotifyAuth';
 import { isAuthenticatedWithSpotify } from './../controllers/userSpotifyAuth';
@@ -47,7 +46,6 @@ router.route('/:username/setPlaylistSaveStatus').post(setPlaylistSaveStatus);
 router.route('/:username/listSavedPlaylists').get(savedPlaylists);
 router.route('/:username/getRecommendations').get(displayRecommendedTracks);
 router.route('/:username/getSimilarTracks').post(recommendTrack);
-router.route('/:username/saveForLater').post(savedForLater);
 router.route('/:username/authenticateWithSpotify').get(userSpotifyAuth);
 router.route('/callback').get(spotifyAuthUser);
 router
