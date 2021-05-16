@@ -29,6 +29,7 @@ import { login } from './../controllers/login';
 import { signUp } from './../controllers/signUp';
 import { auth } from './../controllers/auth';
 import { getTrackStatus } from './../controllers/Modal/getTrackStatus';
+import { explicitCheck } from './../controllers/explicitCheck';
 
 router.route('/scraper').post(fetchData);
 router.route('/setImages').get(setImages);
@@ -58,3 +59,4 @@ router.route('/login').post(login);
 router.route('/signUp').post(signUp);
 router.route('/auth').post(passport.authenticate('local'), auth);
 router.route('/:username/getTrackStatus').post(getTrackStatus);
+router.route('/:username/explicitCheck').get(explicitCheck);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import Switch from 'react-switch';
@@ -11,6 +11,17 @@ function Bar(props) {
 	const [expanded, setExpanded] = useState(false);
 	const username = sessionStorage.getItem('user');
 
+	useEffect(() => {
+		axios
+			.get('http://localhost:5000/' + username + '/explicitCheck')
+			.then((response) => {
+				handleChange(response.data.checked);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	});
+
 	function Change() {
 		setExpanded(true);
 		if (checked === true) handleChange(false);
@@ -18,7 +29,7 @@ function Bar(props) {
 		axios.post('http://localhost:5000/' + username + '/explicit', {
 			explicit: checked,
 		});
-		window.location.reload();
+		//window.location.reload();
 	}
 
 	return (
