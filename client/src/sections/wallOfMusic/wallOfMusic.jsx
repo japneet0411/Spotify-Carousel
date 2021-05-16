@@ -8,6 +8,11 @@ function WallOfMusic() {
 	const username = sessionStorage.getItem('user');
 	const history = useHistory();
 	const params = useParams();
+	if (params.username === 'guest') {
+		Swal.fire('You must be signed up to use this feature');
+		history.push('/login');
+		return null;
+	}
 	if (!username || username !== params.username) {
 		Swal.fire('Unauthorized User. Please login first');
 		sessionStorage.clear();

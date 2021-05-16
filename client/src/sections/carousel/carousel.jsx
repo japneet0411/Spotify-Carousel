@@ -10,6 +10,13 @@ function Slider() {
 	const username = sessionStorage.getItem('user');
 	const history = useHistory();
 	const params = useParams();
+	if (params.username === 'guest') {
+		return (
+			<div>
+				<Carousel />
+			</div>
+		);
+	}
 	if (!username || username !== params.username) {
 		Swal.fire('Unauthorized User. Please login first');
 		sessionStorage.clear();
