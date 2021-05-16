@@ -40,7 +40,11 @@ function Bar(props) {
 				bg='dark'
 				variant='dark'
 				expanded={!props.modalOpen && expanded}>
-				<Navbar.Brand href='#home'>App Name</Navbar.Brand>
+				<Navbar.Brand href='#'>
+					<Link to={'/' + username + '/carousel'} className='regular'>
+						App Name
+					</Link>
+				</Navbar.Brand>
 				<Navbar.Toggle
 					aria-controls='responsive-navbar-nav'
 					onClick={() => setExpanded(expanded ? false : 'expanded')}

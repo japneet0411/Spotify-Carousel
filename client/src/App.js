@@ -7,6 +7,7 @@ import SavedPlaylists from './sections/savedPlaylists/savedPlaylists';
 import Login from './sections/login/login';
 import SignUp from './sections/signUp/signUp';
 import LandingPage from './sections/landingPage/landingPage';
+import About from './sections/about/about';
 
 function App() {
 	return (
@@ -24,6 +25,9 @@ function App() {
 					</Route>
 					<Route path='/:username/carousel'>
 						<Carousel />
+					</Route>
+					<Route path='/about'>
+						<About />
 					</Route>
 					<Route path='/signUp'>
 						<SignUp />
