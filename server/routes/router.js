@@ -1,23 +1,8 @@
 const express = require('express');
 const passport = require('passport');
+const empty = require('is-empty');
 
 export const router = express.Router();
-
-async function checkAuthentication(req, res, next) {
-	if (req.body.username != req.user) {
-		res.status(200).send({ message: 'Unauthorized User. Please login first.' });
-	}
-	if (req.isAuthenticated()) {
-		console.log('Authenticated');
-		req.user = res.locals.user;
-		next();
-	} else {
-		console.log('Unauthenticated User');
-		res.status(200).send({
-			message: 'Unauthorized User. Please login first.',
-		});
-	}
-}
 
 import { fetchData } from './../controllers/Admin/scraper';
 import { setImages } from './../controllers/Admin/setImages';
@@ -47,7 +32,6 @@ import { auth } from './../controllers/auth';
 import { getTrackStatus } from './../controllers/Modal/getTrackStatus';
 import { explicitCheck } from './../controllers/explicitCheck';
 
-router.route('/checkAuthentication').get(checkAuthentication);
 router.route('/scraper').post(fetchData);
 router.route('/setImages').get(setImages);
 router.route('/admin/getRecommendations').get(getRecommendations);
