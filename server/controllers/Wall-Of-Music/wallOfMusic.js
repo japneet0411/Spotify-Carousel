@@ -16,12 +16,14 @@ export const wallOfMusic = async (req, res) => {
 				trackId: tracks[i],
 			})
 			.exec();
-		trackDetails.push({
-			main: track.name,
-			subtext: track.artist,
-			image: track.albumCover,
-			id: track.trackId,
-		});
+		if (!query.explicit && track.explicit === true) {
+			trackDetails.push({
+				main: track.name,
+				subtext: track.artist,
+				image: track.albumCover,
+				id: track.trackId,
+			});
+		}
 	}
 	console.log(trackDetails);
 	res.status(200).send({

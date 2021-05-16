@@ -3,7 +3,6 @@ const passport = require('passport');
 
 export const router = express.Router();
 
-import { appAuth } from './../controllers/appAuth';
 import { fetchData } from './../controllers/Admin/scraper';
 import { setImages } from './../controllers/Admin/setImages';
 import { getRecommendations } from './../controllers/Admin/getRecommendations';
