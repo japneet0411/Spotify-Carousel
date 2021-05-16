@@ -27,7 +27,7 @@ class TrackModal extends Component {
 			color2: '#ffffff',
 			color3: '#ffffff',
 			color4: '#000000',
-			embed_url: this.props.embed_url,
+			embed_url: this.props.embedUrl,
 			loaded: false,
 			icon: faPlusCircle,
 			text: 'Save Track',
@@ -41,7 +41,7 @@ class TrackModal extends Component {
 			.post(
 				'http://localhost:5000/' + this.state.username + '/getTrackStatus',
 				{
-					trackId: this.state.embed_url.replace(
+					trackId: this.props.embedUrl.replace(
 						'https://open.spotify.com/embed/track/',
 						''
 					),
@@ -49,9 +49,21 @@ class TrackModal extends Component {
 			)
 			.then((response) => {
 				//console.log(response);
+				console.log(response.data);
 				this.setState({
 					saved: response.data.saved,
 				});
+				if (response.data.saved) {
+					this.setState({
+						text: 'Saved',
+						icon: faCheckCircle,
+					});
+				} else {
+					this.setState({
+						text: 'Save Track',
+						icon: faPlusCircle,
+					});
+				}
 			})
 			.catch((err) => {
 				console.log(err);
@@ -217,7 +229,9 @@ class TrackModal extends Component {
 
 					<button
 						className='Btn'
-						onClick={this.props.button}
+						onClick={() => {
+							window.location.reload();
+						}}
 						style={this.state.loaded ? {} : { display: 'none' }}>
 						<FontAwesomeIcon
 							icon={faTimes}

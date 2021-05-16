@@ -7,6 +7,7 @@ import './Card-Layout.scss';
 import './Card-Layout.css';
 import Lottie from 'react-lottie';
 import animationData from './../../lotties/carousel-loading.json';
+import Swal from 'sweetalert2';
 
 export default class CardLayout extends Component {
 	constructor(props) {
@@ -20,6 +21,9 @@ export default class CardLayout extends Component {
 		axios
 			.get(this.props.serverURL)
 			.then((response) => {
+				if (response.data.message) {
+					Swal.fire(response.data.message);
+				}
 				//console.log(response.data);
 				this.setState({
 					details: response.data.items,

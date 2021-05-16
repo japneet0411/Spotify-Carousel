@@ -10,25 +10,26 @@ export const displayRecommendedTracks = async (req, res) => {
 		res.status(200).send({
 			message: 'Save tracks to generate recommendations',
 		});
-	}
-	const tracks = query.recommendedTracks;
-	const recommendedTracks = [];
-	for (var i = 0; i < tracks.length; i++) {
-		var track = await tracksModel
-			.findOne({
-				trackId: tracks[i],
-			})
-			.exec();
+	} else {
+		const tracks = query.recommendedTracks;
+		const recommendedTracks = [];
+		for (var i = 0; i < tracks.length; i++) {
+			var track = await tracksModel
+				.findOne({
+					trackId: tracks[i],
+				})
+				.exec();
 
-		recommendedTracks.push({
-			main: track.name,
-			subtext: track.artist,
-			image: track.albumCover,
-			id: track.trackId,
-			message: 'Success',
+			recommendedTracks.push({
+				main: track.name,
+				subtext: track.artist,
+				image: track.albumCover,
+				id: track.trackId,
+				message: 'Success',
+			});
+		}
+		res.status(200).send({
+			items: recommendedTracks,
 		});
 	}
-	res.status(200).send({
-		items: recommendedTracks,
-	});
 };
