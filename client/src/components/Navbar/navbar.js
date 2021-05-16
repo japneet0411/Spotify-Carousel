@@ -12,8 +12,12 @@ function Bar(props) {
 	const username = sessionStorage.getItem('user');
 
 	useEffect(() => {
+		var serverUrl;
+		if (username)
+			serverUrl = 'http://localhost:5000/' + username + '/explicitCheck';
+		else serverUrl = 'http://localhost:5000/guest/explicitCheck';
 		axios
-			.get('http://localhost:5000/' + username + '/explicitCheck')
+			.get(serverUrl)
 			.then((response) => {
 				handleChange(response.data.checked);
 			})
@@ -26,11 +30,14 @@ function Bar(props) {
 		setExpanded(true);
 		if (checked === true) handleChange(false);
 		else handleChange(true);
-		axios.post('http://localhost:5000/' + username + '/explicit', {
+		var serverUrl;
+		if (username) serverUrl = 'http://localhost:5000' + username + '/explicit';
+		else serverUrl = 'http://localhost:5000/guest/explicit';
+		axios.post(serverUrl, {
 			explicit: checked,
 		});
-		//window.location.reload();
 	}
+	//window.location.reload();
 
 	return (
 		<div>
@@ -41,7 +48,9 @@ function Bar(props) {
 				variant='dark'
 				expanded={!props.modalOpen && expanded}>
 				<Navbar.Brand href='#'>
-					<Link to={'/' + username + '/carousel'} className='regular'>
+					<Link
+						to={username ? '/' + username + '/carousel' : '/guest/carousel'}
+						className='regular'>
 						App Name
 					</Link>
 				</Navbar.Brand>
@@ -54,24 +63,44 @@ function Bar(props) {
 					<hr class='Line'></hr>
 					<Nav className='px-1' style={{ textAlign: 'right' }}>
 						<Nav.Link href='#' onClick={() => setExpanded(false)}>
-							<Link className='regular' to={'/' + username + '/carousel'}>
+							<Link
+								className='regular'
+								to={
+									username ? '/' + username + '/carousel' : '/guest/carousel'
+								}>
 								Carousel
 							</Link>
 						</Nav.Link>
 						<Nav.Link href='#' onClick={() => setExpanded(false)}>
-							<Link className='regular' to={'/' + username + '/wallOfMusic'}>
+							<Link
+								className='regular'
+								to={
+									username
+										? '/' + username + '/wallOfMusic'
+										: '/guest/wallOfMusic'
+								}>
 								Wall of Music
 							</Link>
 						</Nav.Link>
 						<Nav.Link href='#' onClick={() => setExpanded(false)}>
 							<Link
 								className='regular'
-								to={'/' + username + '/getRecommendations'}>
+								to={
+									username
+										? '/' + username + '/getRecommendations'
+										: '/guest/getRecommendations'
+								}>
 								Get Recommendations
 							</Link>
 						</Nav.Link>
 						<Nav.Link href='#' onClick={() => setExpanded(false)}>
-							<Link className='regular' to={'/' + username + '/savedPlaylists'}>
+							<Link
+								className='regular'
+								to={
+									username
+										? '/' + username + '/savedPlaylists'
+										: '/guest/savedPlaylists'
+								}>
 								Saved Playlists
 							</Link>
 						</Nav.Link>

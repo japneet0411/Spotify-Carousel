@@ -21,8 +21,11 @@ class DemoCarousel extends Component {
 	}
 	componentDidMount() {
 		const username = sessionStorage.getItem('user');
+		var serverUrl;
+		if (username) serverUrl = 'http://localhost:5000/' + username + '/carousel';
+		else serverUrl = 'http://localhost:5000/guest/carousel';
 		axios
-			.get('http://localhost:5000/' + username + '/carousel')
+			.get(serverUrl)
 			.then((response) => {
 				this.setState({
 					carousel: response.data,

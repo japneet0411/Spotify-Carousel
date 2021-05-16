@@ -37,8 +37,13 @@ class PlayASong extends Component {
 	}
 
 	componentDidMount() {
+		var serverUrl;
+		if (this.state.username) {
+			serverUrl = 'http://localhost:5000/' + this.state.username + '/modal';
+		} else serverUrl = 'http://localhost:5000/guest/modal';
+
 		axios
-			.post('http://localhost:5000/' + this.state.username + '/modal', {
+			.post(serverUrl, {
 				playlist: this.props.index,
 			})
 			.then((response) => {
@@ -80,91 +85,99 @@ class PlayASong extends Component {
 
 	trackSaveStatus = () => {
 		console.log('In track save status');
-		if (this.state.saved) {
-			axios.post(
-				'http://localhost:5000/' + this.state.username + '/removeSavedTrack',
-				{
-					trackId: this.state.embed_url.replace(
-						'https://open.spotify.com/embed/track/',
-						''
-					),
-				}
-			);
-			this.setState({
-				saved: false,
-				text: 'Save Track',
-				icon: faPlusCircle,
-			});
+		if (this.state.username) {
+			if (this.state.saved) {
+				axios.post(
+					'http://localhost:5000/' + this.state.username + '/removeSavedTrack',
+					{
+						trackId: this.state.embed_url.replace(
+							'https://open.spotify.com/embed/track/',
+							''
+						),
+					}
+				);
+				this.setState({
+					saved: false,
+					text: 'Save Track',
+					icon: faPlusCircle,
+				});
+			} else {
+				axios.post(
+					'http://localhost:5000/' + this.state.username + '/saveTrack',
+					{
+						trackId: this.state.embed_url.replace(
+							'https://open.spotify.com/embed/track/',
+							''
+						),
+					}
+				);
+				this.setState({
+					saved: true,
+					text: 'Saved',
+					icon: faCheckCircle,
+				});
+			}
 		} else {
-			axios.post(
-				'http://localhost:5000/' + this.state.username + '/saveTrack',
-				{
-					trackId: this.state.embed_url.replace(
-						'https://open.spotify.com/embed/track/',
-						''
-					),
-				}
-			);
-			this.setState({
-				saved: true,
-				text: 'Saved',
-				icon: faCheckCircle,
-			});
+			Swal.fire('You must be logged in to use this feature');
 		}
 	};
 
 	getSimilarTracks = () => {
-		axios
-			.post(
-				'http://localhost:5000/' + this.state.username + '/getSimilarTracks',
-				{
-					trackId: this.state.embed_url.replace(
-						'https://open.spotify.com/embed/track/',
-						''
-					),
-				}
-			)
-			.then((response) => {
-				console.log(response.data);
-				var html = response.data.name + '<br />' + response.data.artist;
-				Swal.fire({
-					imageUrl: response.data.album,
-					imageHeight: 200,
-					imageWidth: 200,
-					html: html,
-					confirmButtonText: 'Play Track',
-					showCloseButton: true,
-				})
-					.then((result) => {
-						if (result.isConfirmed) {
-							if (response.data.saved) {
-								this.setState({
-									embed_url:
-										'https://open.spotify.com/embed/track/' +
-										response.data.trackId,
-									saved: true,
-									text: 'Saved',
-									icon: faCheckCircle,
-								});
-							} else {
-								this.setState({
-									embed_url:
-										'https://open.spotify.com/embed/track/' +
-										response.data.trackId,
-									saved: false,
-									text: 'Save Track',
-									icon: faPlusCircle,
-								});
-							}
-						}
+		if (this.state.username) {
+			axios
+				.post(
+					'http://localhost:5000/' + this.state.username + '/getSimilarTracks',
+					{
+						trackId: this.state.embed_url.replace(
+							'https://open.spotify.com/embed/track/',
+							''
+						),
+					}
+				)
+				.then((response) => {
+					console.log(response.data);
+					var html = response.data.name + '<br />' + response.data.artist;
+					Swal.fire({
+						imageUrl: response.data.album,
+						imageHeight: 200,
+						imageWidth: 200,
+						html: html,
+						confirmButtonText: 'Play Track',
+						showCloseButton: true,
 					})
-					.catch((err) => {
-						console.log(err);
-					});
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+						.then((result) => {
+							if (result.isConfirmed) {
+								if (response.data.saved) {
+									this.setState({
+										embed_url:
+											'https://open.spotify.com/embed/track/' +
+											response.data.trackId,
+										saved: true,
+										text: 'Saved',
+										icon: faCheckCircle,
+									});
+								} else {
+									this.setState({
+										embed_url:
+											'https://open.spotify.com/embed/track/' +
+											response.data.trackId,
+										saved: false,
+										text: 'Save Track',
+										icon: faPlusCircle,
+									});
+								}
+							}
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			Swal.fire('You must be logged in to use this feature');
+		}
 	};
 
 	render() {

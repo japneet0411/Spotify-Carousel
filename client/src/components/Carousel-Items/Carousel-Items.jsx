@@ -15,8 +15,12 @@ function Items(props) {
 	const onLoadHandler = async () => {
 		const username = sessionStorage.getItem('user');
 		console.log(props);
+		var serverUrl;
+		if (username)
+			serverUrl = 'http://localhost:5000/' + username + '/playlistSaveStatus';
+		else serverUrl = 'http://localhost:5000/guest/playlistSaveStatus';
 		await axios
-			.post('http://localhost:5000/' + username + '/playlistSaveStatus', {
+			.post(serverUrl, {
 				playlistName: props.title,
 			})
 			.then((response) => {
@@ -26,26 +30,31 @@ function Items(props) {
 			.catch((err) => {
 				console.log(err);
 			});
+
 		setLoaded(true);
 	};
 
 	const handleClick = async () => {
 		const username = sessionStorage.getItem('user');
-		await axios
-			.post('http://localhost:5000/' + username + '/setPlaylistSaveStatus', {
-				playlistName: props.title,
-			})
-			.then((response) => {
-				if (response.data.saved) {
-					setSaved(true);
-				} else {
-					setSaved(false);
-				}
-				Swal.fire(response.data.message);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		if (username) {
+			await axios
+				.post('http://localhost:5000/' + username + '/setPlaylistSaveStatus', {
+					playlistName: props.title,
+				})
+				.then((response) => {
+					if (response.data.saved) {
+						setSaved(true);
+					} else {
+						setSaved(false);
+					}
+					Swal.fire(response.data.message);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			Swal.fire('You must be logged in to use this feature');
+		}
 	};
 
 	const defaultOptions = {
