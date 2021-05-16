@@ -3,12 +3,28 @@ const passport = require('passport');
 
 export const router = express.Router();
 
+async function checkAuthentication(req, res, next) {
+	if (req.body.username != req.user) {
+		res.status(200).send({ message: 'Unauthorized User. Please login first.' });
+	}
+	if (req.isAuthenticated()) {
+		console.log('Authenticated');
+		req.user = res.locals.user;
+		next();
+	} else {
+		console.log('Unauthenticated User');
+		res.status(200).send({
+			message: 'Unauthorized User. Please login first.',
+		});
+	}
+}
+
 import { fetchData } from './../controllers/Admin/scraper';
 import { setImages } from './../controllers/Admin/setImages';
 import { getRecommendations } from './../controllers/Admin/getRecommendations';
 import { carousel } from './../controllers/Carousel/carousel';
 import { modal } from './../controllers/Modal/modal';
-import { createUser } from './../controllers/User-Auth/createNewUser';
+//import { createUser } from './../controllers/User-Auth/createNewUser';
 import { saveTrack } from './../controllers/Modal/saveTrack';
 import { wallOfMusic } from './../controllers/Wall-Of-Music/wallOfMusic';
 import { savePlaylist } from './../controllers/Carousel/savePlaylist';
@@ -31,12 +47,12 @@ import { auth } from './../controllers/auth';
 import { getTrackStatus } from './../controllers/Modal/getTrackStatus';
 import { explicitCheck } from './../controllers/explicitCheck';
 
+router.route('/checkAuthentication').get(checkAuthentication);
 router.route('/scraper').post(fetchData);
 router.route('/setImages').get(setImages);
 router.route('/admin/getRecommendations').get(getRecommendations);
 router.route('/:username/carousel').get(carousel);
 router.route('/:username/modal').post(modal);
-router.route('/create-user').post(createUser);
 router.route('/:username/saveTrack').post(saveTrack);
 router.route('/:username/removeSavedTrack').post(removeSavedTrack);
 router.route('/:username/wallOfMusic').get(wallOfMusic);
