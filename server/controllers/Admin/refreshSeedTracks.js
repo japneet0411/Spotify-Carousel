@@ -1,4 +1,4 @@
-import { playlistsModel } from '../../../models/playlists';
+import { playlistsModel } from './../../models/playlists';
 import { refreshPlaylists } from './refreshPlaylists';
 import randomItem from 'random-item';
 

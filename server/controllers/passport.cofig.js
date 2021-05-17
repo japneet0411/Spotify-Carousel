@@ -3,7 +3,7 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 
-import { userAuthModel } from './models/userAuth';
+import { userAuthModel } from './../models/userAuth';
 
 console.log('In passport.js');
 
