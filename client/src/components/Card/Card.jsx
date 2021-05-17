@@ -31,7 +31,7 @@ function Cards(props) {
 
 	const deleteFunction = () => {
 		if (props.type === 'trackModal' && props.delete) {
-			axios.post('http://localhost:5000/' + username + '/removeSavedTrack', {
+			axios.post('http://localhost:5000/' + username + '/removeTrack', {
 				trackId: props.id,
 			});
 			Swal.fire('Deleted track').then((result) => {
@@ -53,7 +53,7 @@ function Cards(props) {
 
 	const loginWithSpotify = () => {
 		axios
-			.get('http://localhost:5000/' + username + '/isAuthenticatedWithSpotify')
+			.get('http://localhost:5000/' + username + '/authenticated')
 			.then((response) => {
 				if (response.data.message === 'Success') {
 					Swal.fire('Your have already connected to your spotify account');
@@ -85,12 +85,12 @@ function Cards(props) {
 
 	const addToSpotify = () => {
 		axios
-			.get('http://localhost:5000/' + username + '/isAuthenticatedWithSpotify')
+			.get('http://localhost:5000/' + username + '/authenticated')
 			.then((response) => {
 				if (response.data.message === 'Success') {
 					handleShowSpotifyModal();
 					axios
-						.get('http://localhost:5000/' + username + '/addToMyLibrary')
+						.get('http://localhost:5000/' + username + '/addToLibrary')
 						.then((response) => {
 							setDetails(response.data.details);
 						})
@@ -108,7 +108,7 @@ function Cards(props) {
 
 	const addToPlaylist = (id) => {
 		axios
-			.post('http://localhost:5000/' + username + '/addToUserPlaylist', {
+			.post('http://localhost:5000/' + username + '/addToPlaylist', {
 				trackId: props.id,
 				playlist: id,
 			})
@@ -123,14 +123,12 @@ function Cards(props) {
 	for (let item of details) {
 		items.push(
 			<div>
-				{/*<ListGroupItem style={{ height: '3rem'}}>*/}
 				<Button
 					variant='light'
 					style={{ margin: '0px', width: '100%', textAlign: 'left' }}
 					onClick={() => addToPlaylist(item.id)}>
 					{item.name}
 				</Button>
-				{/*</ListGroupItem>*/}
 			</div>
 		);
 	}

@@ -1,10 +1,10 @@
-import { usersModel } from './../../models/users';
-import { tracksModel } from './../../models/tracks';
-import { spotifyApi } from './../appAuth';
+import { usersModel } from '../models/users';
+import { tracksModel } from '../models/tracks';
+import { spotifyApi } from './appAuth';
 import randomItem from 'random-item';
 const empty = require('is-empty');
 
-export const getRecommendations = async (username) => {
+export const generateRecommendations = async (username) => {
 	if (empty(spotifyApi.getAccessToken())) {
 		await spotifyApi
 			.clientCredentialsGrant()
@@ -28,7 +28,7 @@ export const getRecommendations = async (username) => {
 				trackId: currentRecommended[i],
 			})
 			.exec();
-		await tracksModel
+		var query2 = await tracksModel
 			.findOneAndUpdate(
 				{
 					trackId: currentRecommended[i],
@@ -38,6 +38,13 @@ export const getRecommendations = async (username) => {
 				}
 			)
 			.exec();
+		if (query2.recommendedTo === 0 && query2.savedBy === 0) {
+			await tracksModel
+				.findOneAndDelete({
+					trackId: query2.trackId,
+				})
+				.exec();
+		}
 	}
 	await usersModel
 		.findOneAndUpdate(
@@ -62,7 +69,6 @@ export const getRecommendations = async (username) => {
 		})
 		.then(async (data) => {
 			for (var j = 0; j < data.body.tracks.length; j++) {
-				console.log(data.body.tracks[j].id);
 				await usersModel
 					.findOneAndUpdate(
 						{
@@ -112,4 +118,37 @@ export const getRecommendations = async (username) => {
 		.catch((err) => {
 			console.log('Something went wrong!', err);
 		});
+};
+
+export const displayRecommendedTracks = async (req, res) => {
+	const query = await usersModel.findOne({
+		username: req.params.username,
+	});
+	const explicitStatus = query.explicit;
+	if (empty(query.recommendedTracks)) {
+		res.status(200).send({
+			message: 'Save tracks to generate recommendations',
+		});
+	} else {
+		const tracks = query.recommendedTracks;
+		const recommendedTracks = [];
+		for (var i = 0; i < tracks.length; i++) {
+			var track = await tracksModel
+				.findOne({
+					trackId: tracks[i],
+				})
+				.exec();
+			if (!explicitStatus || (explicitStatus && track.explicit === false))
+				recommendedTracks.push({
+					main: track.name,
+					subtext: track.artist,
+					image: track.albumCover,
+					id: track.trackId,
+					message: 'Success',
+				});
+		}
+		res.status(200).send({
+			items: recommendedTracks,
+		});
+	}
 };

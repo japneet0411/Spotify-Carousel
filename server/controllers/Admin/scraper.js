@@ -2,12 +2,13 @@ const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 const empty = require('is-empty');
 import { playlistsModel } from './../../models/playlists';
+import { refreshPlaylists } from './refreshPlaylists';
 import { spotifyApi } from './../appAuth';
 
 export const fetchData = async (req, res) => {
 	const browser = await puppeteer.launch();
 	var page = await browser.newPage();
-	const playlists = req.body.playlists;
+	var playlists = req.body.playlists;
 	for (var i = 0; i < playlists.length; i++) {
 		console.log(i);
 		await page.goto(playlists[i]);
@@ -47,6 +48,7 @@ export const fetchData = async (req, res) => {
 			playlistName: name,
 			playlistDescription: description,
 			coverImage: coverImage,
+			carouselImage: coverImage,
 			seedTracks: [],
 			listOfTracks: [],
 		});
@@ -92,5 +94,11 @@ export const fetchData = async (req, res) => {
 				playlistName: listOfPlaylists[i].playlistName,
 			});
 	}
+	console.log('Initialized Playlists');
+	await usersModel.create({
+		username: 'guest',
+	});
+	console.log('Initialized guest user');
+	refreshPlaylists();
 	res.status(200).send('Successfully initialized');
 };

@@ -1,4 +1,5 @@
 import { playlistsModel } from '../../../models/playlists';
+import { refreshPlaylists } from './refreshPlaylists';
 import randomItem from 'random-item';
 
 export const refreshSeedTracks = async (req, res) => {
@@ -21,5 +22,6 @@ export const refreshSeedTracks = async (req, res) => {
 			)
 			.exec();
 	}
-	res.status(200).send('Set new list of seed tracks');
+	refreshPlaylists();
+	res.status(200).send('Refreshed Playlist');
 };

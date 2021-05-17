@@ -6,7 +6,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 require('dotenv').config();
-require('./passport.cofig');
+require('./controllers/passport.cofig');
 
 const app = express();
 
@@ -16,7 +16,6 @@ app.use(logger('combined'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(
 	session({
 		secret: 'halo',
@@ -28,6 +27,7 @@ app.use(
 		},
 	})
 );
+app.use(cookieParser('halo'));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('', router);

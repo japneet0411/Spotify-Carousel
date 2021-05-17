@@ -19,9 +19,11 @@ const playlistSchema = new mongoose.Schema({
 	},
 	carouselImage: {
 		type: String,
+		unique: true,
 	},
 	coverImage: {
 		type: String,
+		unique: true,
 	},
 });
 

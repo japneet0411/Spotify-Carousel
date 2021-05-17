@@ -1,9 +1,6 @@
 const spotifyWebApi = require('spotify-web-api-node');
-const axios = require('axios');
 require('dotenv').config();
-const empty = require('is-empty');
 
-import { token } from 'morgan';
 import { spotifyUserAuthModel } from '../models/spotifyUserAuth';
 
 var scopes = [
@@ -30,29 +27,10 @@ const authorizeURL = userSpotifyApiAuth.createAuthorizeURL(scopes, state);
 var username;
 
 export const userSpotifyAuth = async (req, res) => {
-	console.log(authorizeURL);
 	username = req.params.username;
-	console.log(username);
 	res.status(200).send({
 		url: authorizeURL,
 	});
-	/*const code = await axios.get(authorizeURL);
-    console.log(code);
-    userSpotifyApiAuth
-        .authorizationCodeGrant(code)
-        .then(async(data) => {
-            console.log(data.body['access_token']);
-            await spotifyUserAuthModel.create({
-                username: req.params.username,
-                accessToken: data.body['access_token'],
-                refreshToken: data.body['refresh_token']
-            });
-            userSpotifyApiAuth.setAccessToken(data.body['access_token']);
-            userSpotifyApiAuth.setRefreshToken(data.body['refresh_token']);
-        })
-        .catch((err) => {
-            console.log(err);
-        });*/
 };
 
 export const spotifyAuthUser = async (req, res) => {
@@ -60,7 +38,6 @@ export const spotifyAuthUser = async (req, res) => {
 	userSpotifyApiAuth
 		.authorizationCodeGrant(code)
 		.then(async (data) => {
-			console.log(data.body['access_token']);
 			userSpotifyApiAuth.setAccessToken(data.body['access_token']);
 			userSpotifyApiAuth.setRefreshToken(data.body['refresh_token']);
 			await spotifyUserAuthModel.create({
@@ -75,7 +52,6 @@ export const spotifyAuthUser = async (req, res) => {
 };
 
 export const isAuthenticatedWithSpotify = async (req, res) => {
-	console.log(userSpotifyApiAuth);
 	const query = await spotifyUserAuthModel
 		.findOne({
 			username: req.params.username,

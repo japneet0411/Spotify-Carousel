@@ -1,8 +1,7 @@
-import { usersModel } from './../../models/users';
-import { playlistsModel } from './../../models/playlists';
+import { usersModel } from '../models/users';
+import { playlistsModel } from '../models/playlists';
 
 export const savedPlaylists = async (req, res) => {
-	console.log('In saved playlists');
 	const query = await usersModel.findOne({
 		username: req.params.username,
 	});

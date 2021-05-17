@@ -9,7 +9,7 @@ function WallOfMusic() {
 	const history = useHistory();
 	const params = useParams();
 	if (params.username === 'guest') {
-		Swal.fire('You must be signed up to use this feature');
+		Swal.fire('You must be logged in to use this feature');
 		history.push('/login');
 		return null;
 	}

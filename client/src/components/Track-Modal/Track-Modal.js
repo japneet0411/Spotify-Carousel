@@ -38,15 +38,12 @@ class TrackModal extends Component {
 
 	componentDidMount() {
 		axios
-			.post(
-				'http://localhost:5000/' + this.state.username + '/getTrackStatus',
-				{
-					trackId: this.props.embedUrl.replace(
-						'https://open.spotify.com/embed/track/',
-						''
-					),
-				}
-			)
+			.post('http://localhost:5000/' + this.state.username + '/trackStatus', {
+				trackId: this.props.embedUrl.replace(
+					'https://open.spotify.com/embed/track/',
+					''
+				),
+			})
 			.then((response) => {
 				//console.log(response);
 				console.log(response.data);
@@ -99,7 +96,7 @@ class TrackModal extends Component {
 		console.log('In track save status');
 		if (this.state.saved) {
 			axios.post(
-				'http://localhost:5000/' + this.state.username + '/removeSavedTrack',
+				'http://localhost:5000/' + this.state.username + '/removeTrack',
 				{
 					trackId: this.state.embed_url.replace(
 						'https://open.spotify.com/embed/track/',
@@ -133,7 +130,7 @@ class TrackModal extends Component {
 	getSimilarTracks = () => {
 		axios
 			.post(
-				'http://localhost:5000/' + this.state.username + '/getSimilarTracks',
+				'http://localhost:5000/' + this.state.username + '/getSimilarTrack',
 				{
 					trackId: this.state.embed_url.replace(
 						'https://open.spotify.com/embed/track/',

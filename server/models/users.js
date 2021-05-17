@@ -5,18 +5,19 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		unique: true,
+		immutable: true,
 	},
 	savedTracks: {
 		type: [String],
+		immutable: (doc) => doc.username === 'guest',
 	},
 	recommendedTracks: {
 		type: [String],
+		immutable: (doc) => doc.username === 'guest',
 	},
 	savedPlaylists: {
 		type: [String],
-	},
-	savedForLater: {
-		type: [String],
+		immutable: (doc) => doc.username === 'guest',
 	},
 	explicit: {
 		type: Boolean,

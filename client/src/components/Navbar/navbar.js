@@ -14,8 +14,8 @@ function Bar(props) {
 	useEffect(() => {
 		var serverUrl;
 		if (username)
-			serverUrl = 'http://localhost:5000/' + username + '/explicitCheck';
-		else serverUrl = 'http://localhost:5000/guest/explicitCheck';
+			serverUrl = 'http://localhost:5000/' + username + '/explicitStatus';
+		else serverUrl = 'http://localhost:5000/guest/explicitStatus';
 		axios
 			.get(serverUrl)
 			.then((response) => {

@@ -24,7 +24,6 @@ export default class CardLayout extends Component {
 				if (response.data.message) {
 					Swal.fire(response.data.message);
 				}
-				//console.log(response.data);
 				this.setState({
 					details: response.data.items,
 				});

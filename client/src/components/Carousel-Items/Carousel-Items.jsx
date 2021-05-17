@@ -17,8 +17,8 @@ function Items(props) {
 		console.log(props);
 		var serverUrl;
 		if (username)
-			serverUrl = 'http://localhost:5000/' + username + '/playlistSaveStatus';
-		else serverUrl = 'http://localhost:5000/guest/playlistSaveStatus';
+			serverUrl = 'http://localhost:5000/' + username + '/playlistStatus';
+		else serverUrl = 'http://localhost:5000/guest/playlistStatus';
 		await axios
 			.post(serverUrl, {
 				playlistName: props.title,
@@ -38,7 +38,7 @@ function Items(props) {
 		const username = sessionStorage.getItem('user');
 		if (username) {
 			await axios
-				.post('http://localhost:5000/' + username + '/setPlaylistSaveStatus', {
+				.post('http://localhost:5000/' + username + '/setPlaylistStatus', {
 					playlistName: props.title,
 				})
 				.then((response) => {

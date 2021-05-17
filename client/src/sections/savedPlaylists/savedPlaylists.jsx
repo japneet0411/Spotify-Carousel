@@ -9,7 +9,7 @@ function SavedPlaylists() {
 	const history = useHistory();
 	const params = useParams();
 	if (params.username === 'guest') {
-		Swal.fire('You must be signed up to use this feature');
+		Swal.fire('You must be logged in to use this feature');
 		history.push('/login');
 		return null;
 	}
@@ -24,9 +24,7 @@ function SavedPlaylists() {
 				<Bar />
 				<br />
 				<CardLayout
-					serverURL={
-						'http://localhost:5000/' + username + '/listSavedPlaylists'
-					}
+					serverURL={'http://localhost:5000/' + username + '/savedPlaylists'}
 					heading={'Your Saved Playlists'}
 					subheading={'Lorem Ipsum Dolor Sit Amet'}
 					type={'carouselModal'}

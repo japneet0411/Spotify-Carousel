@@ -1,14 +1,11 @@
-import { tracksModel } from './../../models/tracks';
-import { usersModel } from './../../models/users';
+import { tracksModel } from '../models/tracks';
+import { usersModel } from '../models/users';
 
 export const wallOfMusic = async (req, res) => {
-	console.log('In wall of music');
 	const query = await usersModel.findOne({
 		username: req.params.username,
 	});
-	console.log(query);
 	const tracks = query.savedTracks;
-	console.log(tracks);
 	const trackDetails = [];
 	for (var i = 0; i < tracks.length; i++) {
 		var track = await tracksModel
@@ -25,7 +22,6 @@ export const wallOfMusic = async (req, res) => {
 			});
 		}
 	}
-	console.log(trackDetails);
 	res.status(200).send({
 		items: trackDetails,
 	});

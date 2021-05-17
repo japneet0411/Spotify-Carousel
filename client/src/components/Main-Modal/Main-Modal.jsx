@@ -56,6 +56,34 @@ class PlayASong extends Component {
 			.catch((err) => {
 				console.log(err);
 			});
+		axios
+			.post('http://localhost:5000/' + this.state.username + '/trackStatus', {
+				trackId: this.props.embedUrl.replace(
+					'https://open.spotify.com/embed/track/',
+					''
+				),
+			})
+			.then((response) => {
+				//console.log(response);
+				console.log(response.data);
+				this.setState({
+					saved: response.data.saved,
+				});
+				if (response.data.saved) {
+					this.setState({
+						text: 'Saved',
+						icon: faCheckCircle,
+					});
+				} else {
+					this.setState({
+						text: 'Save Track',
+						icon: faPlusCircle,
+					});
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 	handleClose = () => {
@@ -88,7 +116,7 @@ class PlayASong extends Component {
 		if (this.state.username) {
 			if (this.state.saved) {
 				axios.post(
-					'http://localhost:5000/' + this.state.username + '/removeSavedTrack',
+					'http://localhost:5000/' + this.state.username + '/removeTrack',
 					{
 						trackId: this.state.embed_url.replace(
 							'https://open.spotify.com/embed/track/',
@@ -126,7 +154,7 @@ class PlayASong extends Component {
 		if (this.state.username) {
 			axios
 				.post(
-					'http://localhost:5000/' + this.state.username + '/getSimilarTracks',
+					'http://localhost:5000/' + this.state.username + '/getSimilarTrack',
 					{
 						trackId: this.state.embed_url.replace(
 							'https://open.spotify.com/embed/track/',

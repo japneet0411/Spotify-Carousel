@@ -6,13 +6,6 @@ import { userAuthModel } from './../models/userAuth';
 import { usersModel } from './../models/users';
 
 export const signUp = async (req, res) => {
-	console.log('In sign up');
-	console.log(
-		req.body.username,
-		req.body.email,
-		req.body.password,
-		req.body.confirmPassword
-	);
 	if (
 		empty(req.body.username) ||
 		empty(req.body.password) ||
