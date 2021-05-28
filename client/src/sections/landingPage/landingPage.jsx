@@ -1,8 +1,8 @@
 import React from 'react';
 import './landingPage.scss';
 import './landingPage.css';
-import Background from './../../images/background.jpg';
-import Navbar from './../../components/Navbar/NavbarHome';
+import Background from './../../Images/background.jpg';
+import Navbar from './../../components/Navbar/navbarHome';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 

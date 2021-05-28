@@ -7,7 +7,7 @@ import {
 	faMusic,
 } from '@fortawesome/free-solid-svg-icons';
 import Customize from './customize';
-import Canvas from '../Canvas/Canvas';
+import Canvas from '../canvas/canvas';
 import Modal from 'react-modal';
 import './Main-Modal.scss';
 import './Main-Modal.css';
@@ -33,6 +33,7 @@ class PlayASong extends Component {
 			saved: false,
 			loaded: false,
 			username: sessionStorage.getItem('user'),
+			loadedSimilarTrack: false
 		};
 	}
 
@@ -52,13 +53,9 @@ class PlayASong extends Component {
 					embed_url: response.data.embed_url,
 					saved: response.data.saved,
 				});
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-		axios
+				axios
 			.post('http://localhost:5000/' + this.state.username + '/trackStatus', {
-				trackId: this.props.embedUrl.replace(
+				trackId: this.state.embedUrl.replace(
 					'https://open.spotify.com/embed/track/',
 					''
 				),
@@ -80,6 +77,10 @@ class PlayASong extends Component {
 						icon: faPlusCircle,
 					});
 				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 			})
 			.catch((err) => {
 				console.log(err);
@@ -152,6 +153,8 @@ class PlayASong extends Component {
 
 	getSimilarTracks = () => {
 		if (this.state.username) {
+			if(!this.state.loadedSimilarTrack)
+				Swal.fire("Generating recommendation...give us a minute");
 			axios
 				.post(
 					'http://localhost:5000/' + this.state.username + '/getSimilarTrack',
@@ -165,6 +168,9 @@ class PlayASong extends Component {
 				.then((response) => {
 					console.log(response.data);
 					var html = response.data.name + '<br />' + response.data.artist;
+					this.setState({
+						loadedSimilarTrack: true
+					});
 					Swal.fire({
 						imageUrl: response.data.album,
 						imageHeight: 200,

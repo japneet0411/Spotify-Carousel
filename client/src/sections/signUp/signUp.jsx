@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
+import Navbar from './../../components/Navbar/navbarHome';
 
 function SignUp() {
 	const [username, setUsername] = useState('');
@@ -25,7 +26,6 @@ function SignUp() {
 				confirmPassword: confirmPassword,
 			})
 			.then((response) => {
-				//console.log(response.data);
 				Swal.fire(response.data.message).then((result) => {
 					if (result.isConfirmed) {
 						if (response.data.message === 'Successfully created account') {
@@ -44,6 +44,7 @@ function SignUp() {
 
 	return (
 		<div className='parent'>
+			<Navbar />
 			<Form className='Form'>
 				<center>
 					<h2>SIGN UP</h2>
