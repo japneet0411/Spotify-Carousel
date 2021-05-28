@@ -1,7 +1,7 @@
 import React from 'react';
 import './about.scss';
 import './about.css';
-import Navbar from './../../components/Navbar/NavbarHome';
+import Navbar from './../../components/Navbar/navbarHome';
 const About = () => {
 	return (
 		<div className='about'>

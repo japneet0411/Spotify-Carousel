@@ -5,7 +5,7 @@ import PlayASong from './../Main-Modal/Main-Modal';
 import './Carousel.css';
 import './Carousel.scss';
 import Items from './../Carousel-Items/Carousel-Items';
-import Bar from './../Navbar/Navbar';
+import Bar from './../Navbar/navbar';
 const axios = require('axios');
 
 class DemoCarousel extends Component {

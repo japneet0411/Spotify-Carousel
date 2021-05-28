@@ -1,6 +1,6 @@
 import React from 'react';
 import CardLayout from './../../components/Card-Layout/Card-Layout';
-import Bar from './../../components/Navbar/Navbar';
+import Bar from './../../components/Navbar/navbar';
 import { useHistory, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 

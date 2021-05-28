@@ -1,7 +1,7 @@
 import React from 'react';
 import './contactUs.scss';
 import './contactUs.css';
-import Navbar from './../../components/Navbar/navbar';
+import Navbar from './../../components/Navbar/navbarHome';
 import { Button, Form } from 'react-bootstrap';
 function Contact() {
 	return (

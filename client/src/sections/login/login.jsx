@@ -6,6 +6,7 @@ import { Form } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
+import Navbar from './../../components/Navbar/navbarHome';
 
 function Login() {
 	const [username, setUsername] = useState('');
@@ -38,6 +39,7 @@ function Login() {
 
 	return (
 		<div className='parent'>
+			<Navbar />
 			<Form className='Form'>
 				<center>
 					<h2>LOGIN</h2>

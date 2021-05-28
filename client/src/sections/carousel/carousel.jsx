@@ -4,7 +4,6 @@ import './carousel.css';
 import Carousel from './../../components/Carousel/Carousel';
 import Swal from 'sweetalert2';
 import { useHistory, useParams } from 'react-router-dom';
-//import Bar from '../../components/Navbar/navbar'
 
 function Slider() {
 	const username = sessionStorage.getItem('user');
