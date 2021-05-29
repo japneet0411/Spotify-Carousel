@@ -1,26 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 .contact {
-	height: 100vh;
-	width: 100%;
-	background-color: #a8f368;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	margin: 0;
-	font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+  width: 100%;
+
+  background-color: rgb(30, 215, 96, 0.9);
+  background-image: url("C:\Users\hp\OneDrive\Desktop\Spotify-Carousel\client\src\Images\contact.png");
+  /* background-size: 100% 110%; */
+  background-repeat: repeat;
+  background-position: center;
+  background-blend-mode: darken;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  font-family: "Montserrat", sans-serif;
 }
-#head {
-	background-color: black;
-	font-size: 3.5rem;
-	padding: 20px;
-	height: 90px;
+.contact-Us {
+  width: 30%;
+  margin-right: auto;
+  margin-left: auto;
+  border: 2px solid black;
+  background-color: white;
+  margin-top: 3%;
+
+  border-radius: 15px;
 }
-.text {
-	color: white;
-	height: 50px;
-	margin: 0;
+.header {
+  font-weight: bold;
+  color: black;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
-#body {
-	background-color: #a8f368;
-	padding: 20px;
+
+.Label {
+  text-align: left;
+  width: 80%;
+  font-weight: bolder;
+  float: left;
+  padding-left: 30px;
+}
+
+.Input {
+  width: 60% !important;
+  margin-left: 30px;
+  height: 50px !important;
+  border-radius: 10px !important;
+}
+.Input-Area {
+  width: 90% !important;
+  margin-left: 30px;
 }

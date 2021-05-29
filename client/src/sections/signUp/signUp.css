@@ -1,69 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 .Form {
-	width: 60%;
-	margin-right: auto;
-	margin-left: auto;
-	border: 2px solid black;
-	background-color: white;
-	margin-top: 3%;
-	padding: 35px 20px;
-	height: 90%;
-	border-radius: 15px;
+  width: 30%;
+  margin-right: auto;
+  margin-left: auto;
+  border: 2px solid black;
+  background-color: white;
+  margin-top: 3%;
+  padding: 20px 50px;
+  height: 80%;
+  border-radius: 15px;
 }
 
-h2 {
-	font-weight: bolder;
-	margin-bottom: 40px;
+.sign {
+  font-weight: bolder;
+  margin-bottom: 50px;
 }
 .labels {
-	font-weight: bold;
-	padding-left: 0 !important;
-	margin-bottom: 5px;
-	margin-left: -60%;
-	/* width: 30%; */
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 80%;
+  width: 60%;
+
+  text-align: left;
 }
-.pos {
-	margin-left: -3%;
-}
-/* .pos2{
-    margin-left: 10%;
-    
-} */
+
 .box {
-	margin-left: 10% !important;
-	width: 60% !important;
-	height: 20px !important;
-	/* padding: 20px !important; */
-	margin-bottom: 20px !important;
-	border-radius: 15px !important;
+  margin-right: 80% !important;
+  width: 60% !important;
+  height: 40px !important;
+  margin-bottom: 20px !important;
+  border-radius: 15px !important;
 }
 
 .parent {
-	height: 100vh;
-	width: 100vw;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	background-color: rgb(168, 243, 104, 0.6);
-	font-family: 'Poppins', sans-serif;
-	font-weight: bolder;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: rgb(30, 215, 96, 0.9);
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  background-image: url("C:\Users\hp\OneDrive\Desktop\Spotify-Carousel\client\src\Images\notes.png");
+  background-size: 100% 110%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: darken;
 }
 
 .btns {
-	background-color: rgb(168, 243, 104, 1);
-	padding: 8px 20px;
-	border-radius: 10px;
-	border: 2px solid black !important;
-	color: white;
-	margin-bottom: 5px;
+  background-color: rgb(168, 243, 104, 1);
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: 2px solid black !important;
+  color: white;
+  margin-bottom: 5px;
 }
 .text {
-	font-weight: lighter;
-	margin-right: 40%;
-	padding: 5px;
+  font-weight: lighter;
+  margin-right: 40%;
+  padding: 5px;
 }
 .link {
-	cursor: pointer;
-	text-decoration: underline;
-	color: black;
+  cursor: pointer;
+  text-decoration: underline;
+  color: black;
 }
