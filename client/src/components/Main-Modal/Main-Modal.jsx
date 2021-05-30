@@ -147,14 +147,18 @@ class PlayASong extends Component {
 				});
 			}
 		} else {
-			Swal.fire('You must be logged in to use this feature');
+			Swal.fire({
+				icon: 'warning',
+				title: 'You must be logged in to use this feature'});
 		}
 	};
 
 	getSimilarTracks = () => {
 		if (this.state.username) {
 			if(!this.state.loadedSimilarTrack)
-				Swal.fire("Generating recommendation...give us a minute");
+				Swal.fire({
+					icon: 'info',
+					title: "Generating recommendation...give us a minute!"});
 			axios
 				.post(
 					'http://localhost:5000/' + this.state.username + '/getSimilarTrack',
@@ -210,7 +214,9 @@ class PlayASong extends Component {
 					console.log(err);
 				});
 		} else {
-			Swal.fire('You must be logged in to use this feature');
+			Swal.fire({
+				icon: 'warning',
+				title: 'You must be logged in to use this feature'});
 		}
 	};
 

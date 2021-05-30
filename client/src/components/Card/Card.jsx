@@ -34,7 +34,9 @@ function Cards(props) {
 			axios.post('http://localhost:5000/' + username + '/removeTrack', {
 				trackId: props.id,
 			});
-			Swal.fire('Deleted track').then((result) => {
+			Swal.fire({
+				icon: 'success',
+				title: 'Deleted Track'}).then((result) => {
 				if (result.isConfirmed) {
 					window.location.reload();
 				}
@@ -43,7 +45,9 @@ function Cards(props) {
 			axios.post('http://localhost:5000/' + username + '/removeSavedPlaylist', {
 				playlist: props.id,
 			});
-			Swal.fire('Deleted playlist').then((result) => {
+			Swal.fire({
+				icon: 'success',
+				title: 'Deleted playlist'}).then((result) => {
 				if (result.isConfirmed) {
 					window.location.reload();
 				}
@@ -56,7 +60,9 @@ function Cards(props) {
 			.get('http://localhost:5000/' + username + '/authenticated')
 			.then((response) => {
 				if (response.data.message === 'Success') {
-					Swal.fire('Your have already connected to your spotify account');
+					Swal.fire({
+						icon: 'info',
+						title: 'Your have already connected to your Spotify Account'});
 				} else {
 					Swal.fire({
 						icon: 'question',
@@ -98,7 +104,9 @@ function Cards(props) {
 							console.log(err);
 						});
 				} else {
-					Swal.fire('You must be signed in with Spotify to use this feature');
+					Swal.fire({
+						icon: 'warning',
+						title: 'You must be signed in with Spotify to use this feature'});
 				}
 			})
 			.catch((err) => {
@@ -113,7 +121,9 @@ function Cards(props) {
 				playlist: id,
 			})
 			.then((response) => {
-				Swal.fire(response.data.message);
+				Swal.fire({
+					icon: 'info',
+					title: response.data.message});
 			})
 			.catch((err) => {
 				console.log(err);

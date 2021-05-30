@@ -17,7 +17,9 @@ function Slider() {
 		);
 	}
 	if (!username || username !== params.username) {
-		Swal.fire('Unauthorized User. Please login first');
+		Swal.fire({
+			icon: 'error',
+			title: 'Unauthorized User. Please login first'});
 		sessionStorage.clear();
 		history.push('/login');
 		return null;

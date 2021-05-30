@@ -47,13 +47,17 @@ function Items(props) {
 					} else {
 						setSaved(false);
 					}
-					Swal.fire(response.data.message);
+					Swal.fire({
+						icon: 'info',
+						title: response.data.message});
 				})
 				.catch((err) => {
 					console.log(err);
 				});
 		} else {
-			Swal.fire('You must be logged in to use this feature');
+			Swal.fire({
+				icon: 'warning',
+				title:'You must be logged in to use this feature'});
 		}
 	};
 

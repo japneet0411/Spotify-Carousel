@@ -9,12 +9,18 @@ function GetRecommendations() {
   const history = useHistory();
   const params = useParams();
   if (params.username === "guest") {
-    Swal.fire("You must be logged in to use this feature");
+    Swal.fire({
+      icon: "warning",
+      title: "You must be logged in to use this feature",
+    });
     history.push("/login");
     return null;
   }
   if (!username || username !== params.username) {
-    Swal.fire("Unauthorized User. Please login first");
+    Swal.fire({
+      icon: "error",
+      title: "Unauthorized User. Please login first",
+    });
     sessionStorage.clear();
     history.push("/login");
     return null;
