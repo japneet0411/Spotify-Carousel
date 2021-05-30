@@ -32,8 +32,6 @@ function SignUp() {
             if (response.data.message === "Successfully created account") {
               console.log("created account");
               history.push("/login");
-            } else {
-              window.location.reload();
             }
           }
         });

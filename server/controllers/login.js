@@ -13,13 +13,9 @@ export const login = async (req, res, next) => {
       password: req.body.password,
     })
     .then((response) => {
-      if (response.data.message) {
-        res.status(200).send({
-          message: "Success",
-        });
-      }
+      console.log(response.data.message);
       res.status(200).send({
-        message: "Unauthorized User",
+        message: response.data.message,
       });
     });
 };
@@ -34,4 +30,10 @@ export const auth = async (req, res, next) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+export const unauthorized = async (req, res) => {
+  res.status(200).send({
+    message: "Unauthorized User",
+  });
 };
