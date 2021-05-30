@@ -5,9 +5,11 @@ export const router = express.Router();
 
 import { fetchData } from "./../controllers/Admin/scraper";
 import { refreshSeedTracks } from "./../controllers/Admin/refreshSeedTracks";
+import { refreshPlaylist } from "./../controllers/Admin/refreshPlaylists";
 
 router.route("/initialize").post(fetchData);
 router.route("/refreshPlaylists").get(refreshSeedTracks);
+router.route("/refresh").get(refreshPlaylist);
 
 import { carousel } from "./../controllers/carousel";
 import { playlistSaveStatus } from "./../controllers/carousel";
