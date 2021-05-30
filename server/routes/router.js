@@ -27,17 +27,16 @@ router.route("/:username/explicitStatus").get(explicitCheck);
 
 import { login } from "./../controllers/login";
 import { auth } from "./../controllers/login";
-import { unauthorized } from './../controllers/login';
+import { unauthorized } from "./../controllers/login";
 
 router.route("/login").post(login);
 router
   .route("/auth")
   .post(
-    passport.authenticate("local", { failureRedirect: '/unauthorized' }),
+    passport.authenticate("local", { failureRedirect: "/unauthorized" }),
     auth
   );
-router.route('/unauthorized')
-    .get(unauthorized);
+router.route("/unauthorized").get(unauthorized);
 
 import { modal } from "./../controllers/modal";
 import { getTrackStatus } from "./../controllers/modal";
