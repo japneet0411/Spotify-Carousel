@@ -5,6 +5,7 @@ import Switch from "react-switch";
 import "./navbar.css";
 import "./navbar.scss";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Bar(props) {
   const [checked, handleChange] = useState(true);
@@ -37,7 +38,19 @@ function Bar(props) {
       explicit: checked,
     });
   }
-  //window.location.reload();
+
+  function Logout() {
+    axios
+      .get("http://localhost:5000/logout")
+      .then((response) => {
+        Swal.fire({
+          icon: "success",
+          title: response.data.message,
+        });
+      })
+      .catch((err) => console.log(err));
+    sessionStorage.removeItem("user");
+  }
 
   return (
     <div>
@@ -126,6 +139,17 @@ function Bar(props) {
               onColor={"#1681FF"}
               offColor={"#CFCFCF"}
             />
+            <Nav.Link
+              href="#"
+              onClick={() => {
+                setExpanded(false);
+                Logout();
+              }}
+            >
+              <Link className="regular" to="/">
+                Logout
+              </Link>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

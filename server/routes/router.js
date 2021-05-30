@@ -79,3 +79,7 @@ router.route("/:username/addToLibrary").get(addToLibrary);
 import { wallOfMusic } from "./../controllers/wallOfMusic";
 
 router.route("/:username/wallOfMusic").get(wallOfMusic);
+
+import { logout } from "./../controllers/logout";
+
+router.route("/logout").get(logout);
