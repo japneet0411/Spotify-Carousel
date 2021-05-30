@@ -13,10 +13,15 @@ export const login = async (req, res, next) => {
       password: req.body.password,
     })
     .then((response) => {
-      console.log(response.data.message);
-      res.status(200).send({
-        message: response.data.message,
-      });
+      if (response.data.username)
+        res.status(200).send({
+          message: response.data.message,
+          username: response.data.username,
+        });
+      else
+        res.status(200).send({
+          message: response.data.message,
+        });
     });
 };
 
@@ -26,6 +31,7 @@ export const auth = async (req, res, next) => {
     data.username = req.user.username;
     res.status(200).send({
       message: "Success",
+      username: req.user.username,
     });
   } catch (e) {
     console.log(e);

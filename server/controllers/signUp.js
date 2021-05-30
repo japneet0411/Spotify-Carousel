@@ -12,24 +12,36 @@ export const signUp = async (req, res) => {
     empty(req.body.email) ||
     empty(req.body.confirmPassword)
   ) {
-    res.status(200).send({
-      message: "Please fill in all the fields",
-    });
+    res
+      .status(200)
+      .send({
+        message: "Please fill in all the fields",
+      })
+      .end();
   }
   if (!validator.isEmail(req.body.email)) {
-    res.status(200).send({
-      message: "Please enter correct email",
-    });
+    res
+      .status(200)
+      .send({
+        message: "Please enter correct email",
+      })
+      .end();
   }
   if (!validator.isStrongPassword(req.body.password)) {
-    res.status(200).send({
-      message: "Please enter a strong password",
-    });
+    res
+      .status(200)
+      .send({
+        message: "Please enter a strong password",
+      })
+      .end();
   }
   if (!(req.body.password === req.body.confirmPassword)) {
-    res.status(200).send({
-      message: "Confirm password does not match the given password",
-    });
+    res
+      .status(200)
+      .send({
+        message: "Confirm password does not match the given password",
+      })
+      .end();
   }
   var query = await userAuthModel
     .findOne({
@@ -45,9 +57,12 @@ export const signUp = async (req, res) => {
       email: req.body.email,
     });
     if (query) {
-      res.status(200).send({
-        message: "An account already exists with this email ID",
-      });
+      res
+        .status(200)
+        .send({
+          message: "An account already exists with this email ID",
+        })
+        .end();
     } else {
       const salt = crypto.randomBytes(16).toString("hex");
       const hash = crypto
@@ -62,9 +77,12 @@ export const signUp = async (req, res) => {
       await usersModel.create({
         username: req.body.username,
       });
-      res.status(200).send({
-        message: "Successfully created account",
-      });
+      res
+        .status(200)
+        .send({
+          message: "Successfully created account",
+        })
+        .end();
     }
   }
 };

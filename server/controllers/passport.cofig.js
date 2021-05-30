@@ -23,34 +23,37 @@ passport.use(
       usernameField: "username",
     },
     function (username, password, done) {
-      userAuthModel.findOne({ username: username }, function (err, user) {
-        console.log(user);
-        // If Error Occurs, Return the Error
-        if (err) {
-          return done(err);
+      userAuthModel.findOne(
+        { $or: [{ username: username }, { email: username }] },
+        function (err, user) {
+          console.log(user);
+          // If Error Occurs, Return the Error
+          if (err) {
+            return done(err);
+          }
+          // User Not Found
+          if (!user) {
+            return done(null, false, {
+              message: "Incorrect Username or Password",
+            });
+          }
+          // User Entered Wrong Password
+          if (
+            !(
+              crypto
+                .pbkdf2Sync(password, user.salt, 1000, 64, "sha512")
+                .toString("hex") == user.password
+            )
+          ) {
+            return done(null, false, {
+              message: "Incorrect Username or Password",
+            });
+          }
+          //console.log(req.user);
+          // Everything's Fine
+          return done(null, user);
         }
-        // User Not Found
-        if (!user) {
-          return done(null, false, {
-            message: "Incorrect Username or Password",
-          });
-        }
-        // User Entered Wrong Password
-        if (
-          !(
-            crypto
-              .pbkdf2Sync(password, user.salt, 1000, 64, "sha512")
-              .toString("hex") == user.password
-          )
-        ) {
-          return done(null, false, {
-            message: "Incorrect Username or Password",
-          });
-        }
-        //console.log(req.user);
-        // Everything's Fine
-        return done(null, user);
-      });
+      );
     }
   )
 );
