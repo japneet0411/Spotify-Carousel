@@ -36,6 +36,7 @@ function GetRecommendations() {
           type={"trackModal"}
           delete={false}
           loginWithSpotify={true}
+          add={true}
         />
       </div>
     );
