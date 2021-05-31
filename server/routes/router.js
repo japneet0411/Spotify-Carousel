@@ -5,9 +5,11 @@ export const router = express.Router();
 
 import { fetchData } from "./../controllers/Admin/scraper";
 import { refreshSeedTracks } from "./../controllers/Admin/refreshSeedTracks";
+import { refreshPlaylist } from "./../controllers/Admin/refreshPlaylists";
 
 router.route("/initialize").post(fetchData);
 router.route("/refreshPlaylists").get(refreshSeedTracks);
+router.route("/refresh").get(refreshPlaylist);
 
 import { carousel } from "./../controllers/carousel";
 import { playlistSaveStatus } from "./../controllers/carousel";
@@ -27,9 +29,16 @@ router.route("/:username/explicitStatus").get(explicitCheck);
 
 import { login } from "./../controllers/login";
 import { auth } from "./../controllers/login";
+import { unauthorized } from "./../controllers/login";
 
 router.route("/login").post(login);
-router.route("/auth").post(passport.authenticate("local"), auth);
+router
+  .route("/auth")
+  .post(
+    passport.authenticate("local", { failureRedirect: "/unauthorized" }),
+    auth
+  );
+router.route("/unauthorized").get(unauthorized);
 
 import { modal } from "./../controllers/modal";
 import { getTrackStatus } from "./../controllers/modal";
@@ -70,3 +79,7 @@ router.route("/:username/addToLibrary").get(addToLibrary);
 import { wallOfMusic } from "./../controllers/wallOfMusic";
 
 router.route("/:username/wallOfMusic").get(wallOfMusic);
+
+import { logout } from "./../controllers/logout";
+
+router.route("/logout").get(logout);

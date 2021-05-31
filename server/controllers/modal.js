@@ -73,7 +73,6 @@ export const recommendTrack = async (req, res) => {
   await spotifyApi
     .getAudioFeaturesForTrack(track)
     .then((data) => {
-      console.log("Trying to recommend track");
       const response = data.body;
       const acousticness = response.acousticness;
       const danceability = response.danceability;
@@ -118,11 +117,8 @@ export const recommendTrack = async (req, res) => {
           limit: 5,
         })
         .then((data) => {
-          console.log("Trying to recommend track");
           var count = 0;
           var track = randomItem(data.body.tracks);
-          console.log(track);
-          //apparently explicit = true means no explicit (stupid logic ik but too lazy to change it now)
           while (
             query.explicit ||
             (!query.explicit && track.explicit === false && count != 5)
@@ -130,7 +126,6 @@ export const recommendTrack = async (req, res) => {
             track = randomItem(data.body.tracks);
             count++;
           }
-          console.log(track);
           if (query.savedTracks.indexOf(track) === -1) {
             var recommendedTrack = {
               name: track.name,
@@ -150,7 +145,6 @@ export const recommendTrack = async (req, res) => {
               saved: true,
             };
           }
-          console.log(recommendedTrack);
           res.status(200).send(recommendedTrack);
         })
         .catch((err) => {

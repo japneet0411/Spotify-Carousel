@@ -45,8 +45,6 @@ class TrackModal extends Component {
         ),
       })
       .then((response) => {
-        //console.log(response);
-        console.log(response.data);
         this.setState({
           saved: response.data.saved,
         });
@@ -93,7 +91,6 @@ class TrackModal extends Component {
   };
 
   trackSaveStatus = () => {
-    console.log("In track save status");
     if (this.state.saved) {
       axios.post(
         "http://localhost:5000/" + this.state.username + "/removeTrack",
@@ -139,7 +136,6 @@ class TrackModal extends Component {
         }
       )
       .then((response) => {
-        console.log(response.data);
         var html = response.data.name + "<br />" + response.data.artist;
         Swal.fire({
           imageUrl: response.data.album,
@@ -257,7 +253,6 @@ class TrackModal extends Component {
               onClick={this.trackSaveStatus}
               style={this.state.loaded ? {} : { display: "none" }}
             >
-              {console.log(this.state.saved, this.state.text, this.state.icon)}
               <FontAwesomeIcon
                 icon={this.state.icon}
                 size="1x"

@@ -10,7 +10,6 @@ function Color(props) {
 		else setOpen(true);
 	}
 	function colorPicker(color) {
-		console.log(color);
 		props.setColor(color.hex);
 	}
 	return (

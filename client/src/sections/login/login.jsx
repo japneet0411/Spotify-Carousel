@@ -22,12 +22,13 @@ function Login() {
         password: password,
       })
       .then((response) => {
-        console.log(response);
-        Swal.fire(response.data.message).then((result) => {
+        Swal.fire({
+          icon: 'info',
+          title: response.data.message}).then((result) => {
           if (result.isConfirmed) {
             if (response.data.message === "Success") {
-              sessionStorage.setItem("user", username);
-              history.push("/" + username + "/carousel");
+              sessionStorage.setItem("user", response.data.username);
+              history.push("/" + response.data.username + "/carousel");
             }
           }
         });

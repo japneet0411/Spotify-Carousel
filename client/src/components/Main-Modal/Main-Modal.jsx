@@ -48,7 +48,6 @@ class PlayASong extends Component {
 				playlist: this.props.index,
 			})
 			.then((response) => {
-				//console.log(response);
 				this.setState({
 					embed_url: response.data.embed_url,
 					saved: response.data.saved,
@@ -61,8 +60,6 @@ class PlayASong extends Component {
 				),
 			})
 			.then((response) => {
-				//console.log(response);
-				console.log(response.data);
 				this.setState({
 					saved: response.data.saved,
 				});
@@ -113,7 +110,6 @@ class PlayASong extends Component {
 	};
 
 	trackSaveStatus = () => {
-		console.log('In track save status');
 		if (this.state.username) {
 			if (this.state.saved) {
 				axios.post(
@@ -147,14 +143,18 @@ class PlayASong extends Component {
 				});
 			}
 		} else {
-			Swal.fire('You must be logged in to use this feature');
+			Swal.fire({
+				icon: 'warning',
+				title: 'You must be logged in to use this feature'});
 		}
 	};
 
 	getSimilarTracks = () => {
 		if (this.state.username) {
 			if(!this.state.loadedSimilarTrack)
-				Swal.fire("Generating recommendation...give us a minute");
+				Swal.fire({
+					icon: 'info',
+					title: "Generating recommendation...give us a minute!"});
 			axios
 				.post(
 					'http://localhost:5000/' + this.state.username + '/getSimilarTrack',
@@ -166,7 +166,6 @@ class PlayASong extends Component {
 					}
 				)
 				.then((response) => {
-					console.log(response.data);
 					var html = response.data.name + '<br />' + response.data.artist;
 					this.setState({
 						loadedSimilarTrack: true
@@ -210,7 +209,9 @@ class PlayASong extends Component {
 					console.log(err);
 				});
 		} else {
-			Swal.fire('You must be logged in to use this feature');
+			Swal.fire({
+				icon: 'warning',
+				title: 'You must be logged in to use this feature'});
 		}
 	};
 
@@ -283,7 +284,6 @@ class PlayASong extends Component {
 						<button
 							onClick={this.trackSaveStatus}
 							style={this.state.loaded ? {} : { display: 'none' }}>
-							{console.log(this.state.saved, this.state.text, this.state.icon)}
 							<FontAwesomeIcon
 								icon={this.state.icon}
 								size='1x'

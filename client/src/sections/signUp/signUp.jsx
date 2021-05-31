@@ -27,13 +27,12 @@ function SignUp() {
         confirmPassword: confirmPassword,
       })
       .then((response) => {
-        Swal.fire(response.data.message).then((result) => {
+        Swal.fire({
+          icon: 'info', 
+          title: response.data.message}).then((result) => {
           if (result.isConfirmed) {
             if (response.data.message === "Successfully created account") {
-              console.log("created account");
               history.push("/login");
-            } else {
-              window.location.reload();
             }
           }
         });

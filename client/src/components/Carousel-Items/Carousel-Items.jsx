@@ -14,7 +14,6 @@ function Items(props) {
 
   const onLoadHandler = async () => {
     const username = sessionStorage.getItem("user");
-    console.log(props);
     var serverUrl;
     if (username)
       serverUrl = "http://localhost:5000/" + username + "/playlistStatus";
@@ -34,29 +33,33 @@ function Items(props) {
     setLoaded(true);
   };
 
-  const handleClick = async () => {
-    const username = sessionStorage.getItem("user");
-    if (username) {
-      await axios
-        .post("http://localhost:5000/" + username + "/setPlaylistStatus", {
-          playlistName: props.title,
-        })
-        .then((response) => {
-          if (response.data.saved) {
-            setSaved(true);
-          } else {
-            setSaved(false);
-          }
-          Swal.fire(response.data.message);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      Swal.fire("You must be logged in to use this feature");
-    }
-  };
-
+	const handleClick = async () => {
+		const username = sessionStorage.getItem('user');
+		if (username) {
+			await axios
+				.post('http://localhost:5000/' + username + '/setPlaylistStatus', {
+					playlistName: props.title,
+				})
+				.then((response) => {
+					if (response.data.saved) {
+						setSaved(true);
+					} else {
+						setSaved(false);
+					}
+					Swal.fire({
+						icon: 'info',
+						title: response.data.message});
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			Swal.fire({
+				icon: 'warning',
+				title:'You must be logged in to use this feature'});
+		}
+	};
+  
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -98,7 +101,6 @@ function Items(props) {
             className="Description"
             style={loaded ? {} : { display: "none" }}
           >
-            {console.log(props.description, loaded)}
             {props.description}
           </div>
           <div className="savebutton" style={loaded ? {} : { display: "none" }}>

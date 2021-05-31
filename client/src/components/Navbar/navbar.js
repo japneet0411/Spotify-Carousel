@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import Switch from "react-switch";
 import "./navbar.css";
 import "./navbar.scss";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Bar(props) {
   const [checked, handleChange] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const username = sessionStorage.getItem("user");
 
-  useEffect(() => {
+  function initialize() {
     var serverUrl;
     if (username)
       serverUrl = "http://localhost:5000/" + username + "/explicitStatus";
@@ -24,20 +25,35 @@ function Bar(props) {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }
 
   function Change() {
     setExpanded(true);
     if (checked === true) handleChange(false);
     else handleChange(true);
     var serverUrl;
-    if (username) serverUrl = "http://localhost:5000" + username + "/explicit";
+    if (username) serverUrl = "http://localhost:5000/" + username + "/explicit";
     else serverUrl = "http://localhost:5000/guest/explicit";
-    axios.post(serverUrl, {
-      explicit: checked,
-    });
+    axios
+      .post(serverUrl, {
+        explicit: checked,
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
   }
-  //window.location.reload();
+
+  function Logout() {
+    axios
+      .get("http://localhost:5000/logout")
+      .then((response) => {
+        Swal.fire({
+          icon: "success",
+          title: response.data.message,
+        });
+      })
+      .catch((err) => console.log(err));
+    sessionStorage.removeItem("user");
+  }
 
   return (
     <div>
@@ -47,6 +63,7 @@ function Bar(props) {
         bg="dark"
         variant="dark"
         expanded={!props.modalOpen && expanded}
+        onChange={Change}
       >
         <Navbar.Brand href="#">
           <Link
@@ -58,7 +75,10 @@ function Bar(props) {
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
-          onClick={() => setExpanded(expanded ? false : "expanded")}
+          onClick={() => {
+            setExpanded(expanded ? false : "expanded");
+            if (expanded === false) initialize();
+          }}
         />
 
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -110,22 +130,36 @@ function Bar(props) {
             </Nav.Link>
             <Nav.Link
               href="#"
-              onClick={() => setExpanded(false)}
+              onClick={() => {
+                setExpanded(false);
+                Change();
+              }}
               style={{ marginLeft: "65%" }}
             >
               Explicit Tracks{" "}
             </Nav.Link>
             <Switch
-              className="toggle"
-              onChange={Change}
               checked={checked}
+              onChange={Change}
               checkedIcon={false}
               uncheckedIcon={false}
+              className="toggle"
               width={50}
               height={25}
               onColor={"#1681FF"}
               offColor={"#CFCFCF"}
             />
+            <Nav.Link
+              href="#"
+              onClick={() => {
+                setExpanded(false);
+                Logout();
+              }}
+            >
+              <Link className="regular" to="/">
+                Logout
+              </Link>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

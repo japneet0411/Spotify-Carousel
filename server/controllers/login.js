@@ -13,14 +13,15 @@ export const login = async (req, res, next) => {
       password: req.body.password,
     })
     .then((response) => {
-      if (response.data.message) {
+      if (response.data.username)
         res.status(200).send({
-          message: "Success",
+          message: response.data.message,
+          username: response.data.username,
         });
-      }
-      res.status(200).send({
-        message: "Unauthorized User",
-      });
+      else
+        res.status(200).send({
+          message: response.data.message,
+        });
     });
 };
 
@@ -30,8 +31,15 @@ export const auth = async (req, res, next) => {
     data.username = req.user.username;
     res.status(200).send({
       message: "Success",
+      username: req.user.username,
     });
   } catch (e) {
     console.log(e);
   }
+};
+
+export const unauthorized = async (req, res) => {
+  res.status(200).send({
+    message: "Unauthorized User",
+  });
 };
