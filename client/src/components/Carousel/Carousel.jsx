@@ -41,7 +41,6 @@ class DemoCarousel extends Component {
 			slideshow: true,
 			changing: false,
 		});
-		console.log('Handled close');
 	};
 	onClickItemEvent = (selectedIndex) => {
 		if (this.state.changing === false) {

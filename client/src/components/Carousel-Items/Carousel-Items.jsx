@@ -14,7 +14,6 @@ function Items(props) {
 
   const onLoadHandler = async () => {
     const username = sessionStorage.getItem("user");
-    console.log(props);
     var serverUrl;
     if (username)
       serverUrl = "http://localhost:5000/" + username + "/playlistStatus";
@@ -102,7 +101,6 @@ function Items(props) {
             className="Description"
             style={loaded ? {} : { display: "none" }}
           >
-            {console.log(props.description, loaded)}
             {props.description}
           </div>
           <div className="savebutton" style={loaded ? {} : { display: "none" }}>

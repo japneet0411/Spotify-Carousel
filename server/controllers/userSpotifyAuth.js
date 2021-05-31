@@ -84,15 +84,12 @@ export const addToLibrary = async (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-  console.log(userSpotifyApiAuth);
-  //const trackId = req.body.trackId;
   userSpotifyApiAuth
     .getMe()
     .then((data) => {
       userSpotifyApiAuth
         .getUserPlaylists(data.body.id)
         .then((data) => {
-          console.log(data.body);
           var playlistInfo = [];
           for (var i = 0; i < data.body.items.length; i++) {
             playlistInfo.push({

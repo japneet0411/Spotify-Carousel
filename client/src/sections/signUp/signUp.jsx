@@ -32,7 +32,6 @@ function SignUp() {
           title: response.data.message}).then((result) => {
           if (result.isConfirmed) {
             if (response.data.message === "Successfully created account") {
-              console.log("created account");
               history.push("/login");
             }
           }

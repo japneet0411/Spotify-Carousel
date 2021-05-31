@@ -22,7 +22,6 @@ function Login() {
         password: password,
       })
       .then((response) => {
-        console.log(response);
         Swal.fire({
           icon: 'info',
           title: response.data.message}).then((result) => {

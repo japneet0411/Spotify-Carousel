@@ -38,7 +38,7 @@ function Bar(props) {
       .post(serverUrl, {
         explicit: checked,
       })
-      .then(() => console.log("Set"))
+      .then(() => {})
       .catch((err) => console.log(err));
   }
 

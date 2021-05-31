@@ -11,9 +11,6 @@ function Customize(props) {
   const [color2, setColor2] = useState(props.color2);
   const [color3, setColor3] = useState(props.color3);
   const [color4, setColor4] = useState(props.color4);
-  // var arr=[]
-
-  // {console.log(props.setColor1,props.color1)}
 
   const onClickEvent = () => {
     props.setColor1(color1);
