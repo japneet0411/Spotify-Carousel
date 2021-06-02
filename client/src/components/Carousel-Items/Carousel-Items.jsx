@@ -7,6 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Lottie from "react-lottie";
 import animationData from "./../../lotties/carousel-loading.json";
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 function Items(props) {
   const [loaded, setLoaded] = useState(false);
@@ -80,7 +81,7 @@ function Items(props) {
             textAlign: "center",
           }}
         >
-          <Lottie options={defaultOptions} height={400} width={400} />
+          <Lottie options={defaultOptions} height={700} width={700} />
         </div>
       )}
       <header>
@@ -104,6 +105,7 @@ function Items(props) {
             {props.description}
           </div>
           <div className="savebutton" style={loaded ? {} : { display: "none" }}>
+            <OverlayTrigger placement="right-end" delay={{ show:250, hide: 400 }} overlay={ <Tooltip id="tooltip"> Save/Unsave Playlist </Tooltip>}>
             <button className="btn" onClick={handleClick}>
               <FontAwesomeIcon
                 icon={saved ? faCheckSquare : faPlusSquare}
@@ -111,6 +113,7 @@ function Items(props) {
                 style={{ color: "white" }}
               />
             </button>
+            </OverlayTrigger>
           </div>
         </section>
       </header>

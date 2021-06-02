@@ -6,7 +6,7 @@ import axios from "axios";
 import "./Card-Layout.scss";
 import "./Card-Layout.css";
 import Lottie from "react-lottie";
-import animationData from "./../../lotties/carousel-loading.json";
+import animationData from "./../../lotties/cards-loading.json";
 import Swal from "sweetalert2";
 
 export default class CardLayout extends Component {
@@ -80,7 +80,7 @@ export default class CardLayout extends Component {
               textAlign: "center",
             }}
           >
-            <Lottie options={defaultOptions} height={400} width={400} />
+            <Lottie options={defaultOptions} height={700} width={700} />
           </div>
         )}
         {items.length > 0 ? (

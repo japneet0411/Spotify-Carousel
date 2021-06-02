@@ -14,8 +14,8 @@ import './Main-Modal.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Lottie from 'react-lottie';
-import animationData from './../../lotties/carousel-loading.json';
-//import Switch from 'react-switch';
+import animationData from './../../lotties/modal-loading.json';
+import { Alert } from 'react-bootstrap';
 
 class PlayASong extends Component {
 	constructor(props) {
@@ -33,7 +33,8 @@ class PlayASong extends Component {
 			saved: false,
 			loaded: false,
 			username: sessionStorage.getItem('user'),
-			loadedSimilarTrack: false
+			loadedSimilarTrack: false,
+			showAlert: true
 		};
 	}
 
@@ -254,7 +255,7 @@ class PlayASong extends Component {
 								width: '100%',
 								textAlign: 'center',
 							}}>
-							<Lottie options={defaultOptions} height={400} width={400} />
+							<Lottie options={defaultOptions} height={700} width={700} />
 						</div>
 					)}
 
@@ -268,7 +269,9 @@ class PlayASong extends Component {
 							style={{ color: 'white' }}
 						/>
 					</button>
-
+					<Alert className="alert-custom" variant="light" onClose={() => this.setState({ showAlert: false})} dismissible style={this.state.showAlert ? {} : { display: 'none' }}>
+						Click the play button to play track.
+					</Alert>
 					<iframe
 						className='frame'
 						title='Music'
