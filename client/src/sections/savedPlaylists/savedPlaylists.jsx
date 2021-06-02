@@ -34,6 +34,7 @@ function SavedPlaylists() {
 					type={'carouselModal'}
 					delete={true}
 					loginWithSpotify={false}
+					add={false}
 				/>
 			</div>
 		);

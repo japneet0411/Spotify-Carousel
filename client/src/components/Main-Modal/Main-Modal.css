@@ -31,11 +31,10 @@
 
 .modal-button {
   z-index: 15;
-  position: absolute;
-  width: 100%;
+  position:relative;
   text-align: center;
   margin-top: 30%;
-  margin-left: 30%;
+  margin-right:30%;
 }
 
 .modal-button button {
@@ -43,45 +42,14 @@
   background-color: transparent;
   border: 1px solid white;
   color: white;
+  width: 10%;
+  /* padding: 10px; */
 }
 
-.add {
-  z-index: 15;
-  background-color: transparent;
-  border: 1px solid white;
-  margin-left: -63%;
-  margin-top: 35%;
-  position: absolute;
-  color: white;
-  width: 50px;
-  padding: 3px;
-  font-size: smaller;
-}
-
-.customise {
-  z-index: 15;
-  background-color: transparent;
-  border: 1px solid white;
-  position: absolute;
-  color: white;
-  width: 50px;
-  font-size: smaller;
-  padding: 3px;
-  margin-left: -30%;
-  margin-top: 35%;
-}
-
-.recommended {
-  z-index: 15;
-  background-color: transparent;
-  border: 1px solid white;
-  position: absolute;
-  color: white;
-  width: 50px;
-  font-size: smaller;
-  padding: 3px;
-  margin-left: -41%;
-  margin-top: 35%;
+.modal-button button:hover{
+  
+  background-color: rgb(30, 215, 96, 0.4);
+  /* opacity: 0.8; */
 }
 
 strong {

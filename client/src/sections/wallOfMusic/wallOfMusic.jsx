@@ -34,6 +34,7 @@ function WallOfMusic() {
 					type={'trackModal'}
 					delete={true}
 					loginWithSpotify={true}
+					add={true}
 				/>
 			</div>
 		);

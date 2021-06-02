@@ -26,7 +26,7 @@
   text-align: center;
   font-size: 1.2rem;
   font-family: "Noto Sans JP", sans-serif;
-  margin-top: -300px;
+  margin-top: -370px;
 }
 
 .savebutton {
@@ -35,19 +35,23 @@
   width: 100%;
   text-align: left;
   top: 0%;
+ 
+  
+  
 }
 
 .btn {
   background-color: transparent;
+  cursor: pointer;
 }
 
 header {
-  height: 93.4vh;
+  height: 92.8vh;
   width: 100vw;
   background: black;
   overflow-y: hidden;
   position: relative;
-  z-index: -1;
+  z-index: 2;
 }
 
 img {

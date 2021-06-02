@@ -55,6 +55,7 @@ export default class CardLayout extends Component {
             type={this.props.type}
             delete={this.props.delete}
             loginWithSpotify={this.props.loginWithSpotify}
+            add={this.props.add}
           />
         );
       }

@@ -282,6 +282,7 @@ class PlayASong extends Component {
 						onLoad={() => this.setState({ loaded: true })}></iframe>
 					<div className='modal-button'>
 						<button
+						
 							onClick={this.trackSaveStatus}
 							style={this.state.loaded ? {} : { display: 'none' }}>
 							<FontAwesomeIcon
@@ -293,6 +294,7 @@ class PlayASong extends Component {
 							{this.state.text}
 						</button>
 						<button
+							
 							style={this.state.loaded ? {} : { display: 'none' }}
 							onClick={this.onClickEvent}>
 							<FontAwesomeIcon
@@ -304,6 +306,7 @@ class PlayASong extends Component {
 							Customize
 						</button>
 						<button
+							
 							onClick={this.getSimilarTracks}
 							style={this.state.loaded ? {} : { display: 'none' }}>
 							<FontAwesomeIcon
