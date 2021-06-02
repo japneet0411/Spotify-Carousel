@@ -7,7 +7,7 @@ import { refreshPlaylist } from "./refreshPlaylists";
 import { spotifyApi } from "./../appAuth";
 
 export const fetchData = async (req, res) => {
-  const browser = await puppeteer.launch();
+  /*const browser = await puppeteer.launch();
   var page = await browser.newPage();
   var playlists = req.body.playlists;
   for (var i = 0; i < playlists.length; i++) {
@@ -98,7 +98,7 @@ export const fetchData = async (req, res) => {
   console.log("Initialized Playlists");
   await usersModel.create({
     username: "guest",
-  });
+  });*/
   console.log("Initialized guest user");
   await refreshPlaylist();
   res.status(200).send("Successfully initialized");

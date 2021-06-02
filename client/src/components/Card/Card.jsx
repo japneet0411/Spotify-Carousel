@@ -189,12 +189,14 @@ function Cards(props) {
         </Modal.Footer>
       </Modal>
       <Card style={{ width: "20rem" }} className="cards">
+        <OverlayTrigger placement="right" delay={{ show: 250, hide: 400 }} overlay={ <Tooltip id="tooltip">Click to play track</Tooltip>}>
         <Card.Img
           variant="top"
           src={props.src}
           className="card-img"
           onClick={play}
         />
+        </OverlayTrigger>
         <Card.Body>
           <Card.Text className="card-text-style">
             <span style={{ fontSize: "1.5rem" }}>{props.main}</span> <br />
@@ -238,7 +240,7 @@ function Cards(props) {
               placement="bottom"
               delay={{ show: 250, hide: 400 }}
               overlay={ <Tooltip id="tooltip">
-                        "Login with spotify"
+                        Login with Spotify
                       </Tooltip>}
 		
             >
