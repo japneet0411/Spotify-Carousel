@@ -25,11 +25,12 @@ const About = () => {
         </p>
 
         <p className="details">
-          <strong>IWPT Project (Spotify Carousel) Team members:</strong>{" "}
+          IWPT Project Team Members:{" "}
           <br></br>
+          <br />
           Swayam Shresth Mohapatra (19BCT0021)<br></br>
           Japneet Kaur (19BCT0045)<br></br>
-          Aayushi Verma (19BCT0068)
+          Aayushi Varma (19BCT0068)
         </p>
       </div>
     </div>

@@ -80,6 +80,10 @@ import { wallOfMusic } from "./../controllers/wallOfMusic";
 
 router.route("/:username/wallOfMusic").get(wallOfMusic);
 
+import { contactUs } from "./../controllers/contactUs";
+
+router.route("/contactUs").post(contactUs);
+
 import { logout } from "./../controllers/logout";
 
 router.route("/logout").get(logout);
