@@ -13,7 +13,7 @@ const unsplash = createApi({
 });
 
 export const refreshPlaylist = async () => {
-  /*if (empty(spotifyApi.getAccessToken())) {
+  if (empty(spotifyApi.getAccessToken())) {
     await spotifyApi
       .clientCredentialsGrant()
       .then((data) => {
@@ -22,11 +22,11 @@ export const refreshPlaylist = async () => {
       .catch((err) => {
         console.log(err);
       });
-  }*/
+  }
   var playlists = await playlistsModel.find({}).exec();
-  for (var i = 136; i < 137; i++) {
+  for (var i = 0; i < playlists.length; i++) {
     console.log(i);
-    /*await spotifyApi
+    await spotifyApi
       .getRecommendations({
         seed_tracks: playlists[i].seedTracks,
         min_popularity: 50,
@@ -49,7 +49,7 @@ export const refreshPlaylist = async () => {
       })
       .catch((err) => {
         console.log("Something went wrong!", err);
-      });*/
+      });
     await unsplash.photos
       .getRandom({
         query: "no people",
