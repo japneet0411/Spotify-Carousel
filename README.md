@@ -1,6 +1,6 @@
 # Spotify-Carousel 🎵
 <h1>IWPT Project </h1>
-<p>Spotify Carousel webApp built using React , Bootstrap, NodeJs and express, SpotifyAPI.</p>
+<p>Spotify Carousel webApp built using React , Bootstrap, NodeJs  express and SpotifyAPI.</p>
 
 <h2>SETUP ⚙</h2>
 <p>Register a new Spotify App in the Developer Console. Note the Client ID & Client Secret.<.p>
